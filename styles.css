@@ -1530,6 +1530,346 @@ input[type="file"] {
     display: none;
 }
 
+/* About Us Section */
+.about-us {
+    padding: var(--section-padding);
+    background: linear-gradient(135deg, var(--warm-white) 0%, var(--cream) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23D2691E" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23DAA520" opacity="0.1"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.about-text {
+    max-width: 100%;
+}
+
+.story-content {
+    margin-bottom: 3rem;
+}
+
+.story-content .intro-text {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.story-content .intro-text strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.story-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: var(--dark-brown);
+}
+
+.story-content em {
+    color: var(--primary-color);
+    font-style: italic;
+    font-weight: 500;
+}
+
+.mission-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--soft-shadow);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.value-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 69, 19, 0.05), transparent);
+    transition: left 0.5s ease;
+}
+
+.value-item:hover::before {
+    left: 100%;
+}
+
+.value-item:hover {
+    transform: translateY(-5px) rotateX(5deg) scale(1.02);
+    box-shadow: var(--medium-shadow);
+}
+
+.value-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: var(--soft-shadow);
+    transition: all 0.3s ease;
+}
+
+.value-item:hover .value-icon {
+    transform: scale(1.1) rotateY(15deg);
+    box-shadow: var(--medium-shadow);
+}
+
+.value-content h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.value-content p {
+    color: var(--dark-brown);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.about-image {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.founders-image-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--medium-shadow);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.founders-image-container:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02);
+    box-shadow: var(--strong-shadow);
+}
+
+.founders-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.founders-image-container:hover .founders-image {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(139, 69, 19, 0.9));
+    padding: 2rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.founders-image-container:hover .image-overlay {
+    transform: translateY(0);
+}
+
+.overlay-text h3 {
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.overlay-text p {
+    color: var(--cream);
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.artisan-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.showcase-item {
+    height: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--soft-shadow);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.showcase-item:hover {
+    transform: translateY(-5px) rotateY(5deg) scale(1.05);
+    box-shadow: var(--medium-shadow);
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.showcase-item:hover img {
+    transform: scale(1.1);
+}
+
+/* About Us Animations */
+@keyframes aboutFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-us .section-header {
+    animation: aboutFadeIn 0.8s ease-out;
+}
+
+.about-content {
+    animation: aboutFadeIn 0.8s ease-out 0.2s both;
+}
+
+.value-item:nth-child(1) {
+    animation: aboutFadeIn 0.8s ease-out 0.4s both;
+}
+
+.value-item:nth-child(2) {
+    animation: aboutFadeIn 0.8s ease-out 0.6s both;
+}
+
+.value-item:nth-child(3) {
+    animation: aboutFadeIn 0.8s ease-out 0.8s both;
+}
+
+/* Mobile Responsive for About Us */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .story-content .intro-text {
+        font-size: 1.2rem;
+    }
+    
+    .story-content p {
+        font-size: 1rem;
+    }
+    
+    .value-item {
+        padding: 1.2rem;
+    }
+    
+    .value-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .founders-image-container {
+        height: 280px;
+    }
+    
+    .artisan-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .showcase-item {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us {
+        padding: 40px 0;
+    }
+    
+    .about-content {
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .story-content {
+        margin-bottom: 2rem;
+    }
+    
+    .story-content .intro-text {
+        font-size: 1.1rem;
+    }
+    
+    .value-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .founders-image-container {
+        height: 250px;
+    }
+}
+
+/* Performance Optimizations for About Us */
+.about-us .value-item,
+.about-us .founders-image-container,
+.about-us .showcase-item {
+    will-change: transform;
+}
+
 /* Footer */
 .footer {
     background: var(--primary-color);
@@ -2317,9 +2657,181 @@ section {
 .diwali-offer {
     background: linear-gradient(135deg, #ff4d4d, #ff9933);
     color: white;
-    padding: 40px 0;
-    margin-top: 20px;
+    padding: 60px 0;
+    margin: 40px 0;
+    animation: diwaliGlow 3s ease-in-out infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+.diwali-offer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23FFD700" opacity="0.3"><animate attributeName="r" values="2;8;2" dur="3s" repeatCount="indefinite"/></circle></svg>') repeat;
+    pointer-events: none;
+    animation: sparkle 4s linear infinite;
+}
+
+.offer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.offer-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.offer-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     animation: pulse 2s infinite;
+}
+
+.offer-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #FFD700;
+}
+
+.offer-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.countdown {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    min-width: 80px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: countdownPulse 2s ease-in-out infinite;
+}
+
+.countdown-item span:first-child {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.countdown-item span:last-child {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.offer-image {
+    flex: 0 0 auto;
+    max-width: 300px;
+}
+
+.offer-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Diwali Animations */
+@keyframes diwaliGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 40px rgba(255, 153, 51, 0.8), 0 0 60px rgba(255, 215, 0, 0.3);
+    }
+}
+
+@keyframes countdownPulse {
+    0%, 100% {
+        transform: scale(1);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100px);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile responsive for Diwali offer */
+@media (max-width: 768px) {
+    .diwali-offer {
+        padding: 40px 0;
+        margin: 20px 0;
+    }
+    
+    .offer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .offer-text h2 {
+        font-size: 2rem;
+    }
+    
+    .offer-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .countdown {
+        justify-content: center;
+    }
+    
+    .countdown-item {
+        min-width: 70px;
+        padding: 0.8rem;
+    }
+    
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+    
+    .offer-image {
+        max-width: 250px;
+    }
+}
 }
 
 @keyframes pulse {

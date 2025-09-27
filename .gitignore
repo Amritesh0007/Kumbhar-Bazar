@@ -1,0 +1,14 @@
+# Node.js ignore
+node_modules
+.env
+*.env
+*.log
+*.DS_Store
+*.env.example
+
+# Docker ignore
+docker-compose.yml
+Dockerfile
+
+# Form submissions
+form_submissions/

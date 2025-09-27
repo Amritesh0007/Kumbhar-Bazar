@@ -593,140 +593,257 @@ const products = {
         id: 1,
         name: "Traditional Clay Pots",
         description: "Handcrafted earthenware perfect for cooking and storage. Made from natural clay and fired in traditional kilns.",
-        price: 599,
+        price: 599, // Average of ₹299-₹899
         image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center"
     },
     2: {
         id: 2,
         name: "Decorative Vases",
         description: "Beautiful ceramic vases for home decoration. Each piece is uniquely crafted by skilled artisans.",
-        price: 899,
+        price: 699, // Average of ₹499-₹1,299
         image: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=300&h=300&fit=crop&crop=center"
     },
     3: {
         id: 3,
         name: "Tea Cups & Sets",
         description: "Traditional terracotta cups for authentic tea experience. Perfect for your morning chai.",
-        price: 449,
+        price: 324, // Average of ₹199-₹449
         image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=300&fit=crop&crop=center"
     },
     4: {
         id: 4,
         name: "Planters",
         description: "Eco-friendly clay planters for your garden. Natural clay helps regulate soil moisture.",
-        price: 699,
+        price: 549, // Average of ₹399-₹999
         image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=300&fit=crop&crop=center"
     },
     5: {
         id: 5,
         name: "Water Bottles",
         description: "Natural clay bottles for cool, pure water. Clay naturally cools and filters water.",
-        price: 574,
+        price: 474, // Average of ₹349-₹799
         image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=300&h=300&fit=crop&crop=center"
     },
     6: {
         id: 6,
         name: "Lamps & Diyas",
         description: "Traditional clay lamps for festivals and decoration. Create warm, ambient lighting.",
-        price: 249,
+        price: 249, // Average of ₹99-₹399
         image: "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?w=300&h=300&fit=crop&crop=center"
     },
     7: {
         id: 7,
         name: "Clay Bowls",
         description: "Handmade clay bowls for serving and dining. Perfect for traditional meals and modern kitchens.",
-        price: 399,
+        price: 299, // Average of ₹199-₹599
         image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=300&h=300&fit=crop&crop=center"
     },
     8: {
         id: 8,
         name: "Decorative Figurines",
         description: "Artistic clay figurines and sculptures. Beautiful handcrafted pieces for home decoration.",
-        price: 1299,
+        price: 949, // Average of ₹599-₹1,299
         image: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=300&h=300&fit=crop&crop=center"
     },
     9: {
         id: 9,
         name: "Storage Jars",
         description: "Large clay jars for food and grain storage. Traditional earthenware with excellent preservation properties.",
-        price: 1549,
+        price: 1174, // Average of ₹799-₹1,549
         image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=300&fit=crop&crop=center"
     },
     10: {
         id: 10,
         name: "Terracotta Plates",
         description: "Traditional dining plates made from pure clay. Perfect for healthy and eco-friendly dining.",
-        price: 299,
+        price: 224, // Average of ₹149-₹299
         image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop&crop=center"
     },
     11: {
         id: 11,
         name: "Clay Wind Chimes",
         description: "Musical clay wind chimes for peaceful ambiance. Handcrafted with melodious tones.",
-        price: 549,
+        price: 424, // Average of ₹299-₹549
         image: "https://images.unsplash.com/photo-1597149960419-0d90ac2e3db4?w=300&h=300&fit=crop&crop=center"
     },
     12: {
         id: 12,
         name: "Earthen Coolers",
         description: "Natural clay water coolers for summer. Eco-friendly alternative to electric coolers.",
-        price: 2399,
+        price: 1799, // Average of ₹1299-₹2,299
         image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop&crop=center"
     },
     13: {
         id: 13,
         name: "Kulhad Tea Cups",
         description: "Traditional Indian clay cups for chai. Authentic taste and eco-friendly disposable cups.",
-        price: 199,
+        price: 149, // Average of ₹99-₹199
         image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center"
     },
     14: {
         id: 14,
         name: "Matka Water Pots",
         description: "Traditional water storage earthen pots. Keep water naturally cool and fresh.",
-        price: 799,
+        price: 599, // Average of ₹399-₹799
         image: "https://images.unsplash.com/photo-1630692131380-31b468e5bff8?w=300&h=300&fit=crop&crop=center"
     },
     15: {
         id: 15,
         name: "Clay Cooking Pots",
         description: "Traditional handi and earthen cookware. Perfect for slow cooking and enhancing flavors.",
-        price: 1199,
+        price: 899, // Average of ₹599-₹1,199
         image: "https://images.unsplash.com/photo-1586174158878-b1a6b7b5de4f?w=300&h=300&fit=crop&crop=center"
     }
 };
 
 // Diwali Offer Configuration
-const diwaliDate = new Date('2025-10-26T00:00:00');
+// Set to Diwali 2025 (October 26th) - actual date
+// Try different date formats to ensure compatibility
+let diwaliDate;
+try {
+    // Try ISO format first
+    diwaliDate = new Date('2025-10-26T00:00:00');
+    
+    // Fallback to different format if invalid
+    if (isNaN(diwaliDate.getTime())) {
+        diwaliDate = new Date(2025, 9, 26, 0, 0, 0); // Month is 0-indexed
+    }
+    
+    // Another fallback
+    if (isNaN(diwaliDate.getTime())) {
+        diwaliDate = new Date('October 26, 2025');
+    }
+} catch (error) {
+    console.error('Date creation failed:', error);
+    // Final fallback - 30 days from now
+    diwaliDate = new Date();
+    diwaliDate.setDate(diwaliDate.getDate() + 30);
+}
+
+// Debug: Log the target date and current time
+console.log('Diwali Date:', diwaliDate);
+console.log('Current Date:', new Date());
+console.log('Time difference (ms):', diwaliDate.getTime() - new Date().getTime());
+console.log('Days until Diwali:', Math.floor((diwaliDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)));
 
 // Initialize countdown
 function initCountdown() {
+    console.log('Initializing Diwali countdown...');
+    
     const countdownElement = document.getElementById('diwaliCountdown');
-    if (!countdownElement) return;
+    console.log('Countdown container found:', !!countdownElement);
+    
+    if (!countdownElement) {
+        console.error('Diwali countdown container not found!');
+        // Try again after a short delay
+        setTimeout(() => {
+            console.log('Retrying countdown initialization...');
+            initCountdown();
+        }, 1000);
+        return;
+    }
 
+    // Test if individual elements exist
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    console.log('Individual timer elements:', {
+        days: !!daysElement,
+        hours: !!hoursElement,
+        minutes: !!minutesElement,
+        seconds: !!secondsElement
+    });
+
+    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
+        console.error('Some countdown elements are missing!');
+        console.log('Available elements in diwaliCountdown:', countdownElement.innerHTML);
+        return;
+    }
+
+    // Initialize the countdown immediately
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    
+    // Set up interval to update every second
+    const intervalId = setInterval(updateCountdown, 1000);
+    console.log('Countdown interval started with ID:', intervalId);
 }
 
 // Update countdown timer
 function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = diwaliDate.getTime() - now;
+    try {
+        const now = new Date().getTime();
+        const distance = diwaliDate.getTime() - now;
 
-    if (distance < 0) {
-        document.getElementById('diwaliOffer').style.display = 'none';
-        return;
+        console.log('Update countdown called - distance:', distance);
+
+        if (distance < 0) {
+            console.log('Countdown expired, hiding offer section');
+            const diwaliOfferSection = document.getElementById('diwaliOffer');
+            if (diwaliOfferSection) {
+                diwaliOfferSection.style.display = 'none';
+            }
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Debug: Check if elements exist
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        console.log('Timer elements found:', {
+            days: !!daysElement,
+            hours: !!hoursElement,
+            minutes: !!minutesElement,
+            seconds: !!secondsElement
+        });
+
+        console.log('Calculated time:', { days, hours, minutes, seconds });
+
+        // Update elements with safety checks
+        if (daysElement) {
+            daysElement.textContent = days.toString().padStart(2, '0');
+            console.log('Updated days element:', daysElement.textContent);
+        } else {
+            console.error('Days element not found!');
+        }
+        
+        if (hoursElement) {
+            hoursElement.textContent = hours.toString().padStart(2, '0');
+        } else {
+            console.error('Hours element not found!');
+        }
+        
+        if (minutesElement) {
+            minutesElement.textContent = minutes.toString().padStart(2, '0');
+        } else {
+            console.error('Minutes element not found!');
+        }
+        
+        if (secondsElement) {
+            secondsElement.textContent = seconds.toString().padStart(2, '0');
+        } else {
+            console.error('Seconds element not found!');
+        }
+        
+        // Force a repaint
+        if (daysElement) {
+            daysElement.style.opacity = '0.99';
+            setTimeout(() => {
+                daysElement.style.opacity = '1';
+            }, 10);
+        }
+        
+    } catch (error) {
+        console.error('Error in updateCountdown:', error);
     }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 }
 
 // Cart Functions
@@ -815,90 +932,6 @@ function updateCartDisplay() {
     }
 }
 
-// Theme System
-function initThemeSystem() {
-    const themeBtn = document.getElementById('themeBtn');
-    const themeOptions = document.getElementById('themeOptions');
-    const themeOptionElements = document.querySelectorAll('.theme-option');
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('kumbharbajar-theme') || 'earth';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Initialize Diwali countdown
-    initCountdown();
-    
-    // Theme button click
-    themeBtn.addEventListener('click', () => {
-        themeOptions.classList.toggle('active');
-    });
-    
-    // Theme option selection
-    themeOptionElements.forEach(option => {
-        option.addEventListener('click', () => {
-            const theme = option.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('kumbharbajar-theme', theme);
-            themeOptions.classList.remove('active');
-            showNotification(`Theme changed to ${theme}!`, 'success');
-        });
-    });
-    
-    // Close theme options when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.theme-switcher')) {
-            themeOptions.classList.remove('active');
-        }
-    });
-}
-
-// Cart Modal System
-function initCartModal() {
-    const cartBtn = document.getElementById('cartBtn');
-    const cartModal = document.getElementById('cartModal');
-    const cartClose = document.getElementById('cartClose');
-    const clearCart = document.getElementById('clearCart');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    
-    // Open cart modal
-    cartBtn.addEventListener('click', () => {
-        cartModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    // Close cart modal
-    cartClose.addEventListener('click', () => {
-        cartModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    // Close on backdrop click
-    cartModal.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            cartModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Clear cart
-    clearCart.addEventListener('click', () => {
-        cart = [];
-        updateCartDisplay();
-        showNotification('Cart cleared!', 'success');
-    });
-    
-    // Checkout
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            showNotification('Your cart is empty!', 'error');
-            return;
-        }
-        showNotification('Checkout functionality coming soon!', 'success');
-        cartModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
 // Product Modal System
 function initProductModal() {
     const productModal = document.getElementById('productModal');
@@ -925,7 +958,7 @@ function initProductModal() {
                 modalProductPrice.textContent = product.price;
                 
                 productModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = '';
             }
         });
     });
@@ -1258,14 +1291,78 @@ function enhanceParticleSystem() {
 
 // Initialize all systems when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Initializing systems...');
+    
     initWelcomeScreen();
     initThemeSystem();
     initCartModal();
     initProductModal();
     initAddToCartButtons();
+    
+    // Initialize Diwali countdown with a slight delay to ensure DOM is fully ready
+    setTimeout(() => {
+        console.log('Initializing Diwali countdown with delay...');
+        initCountdown();
+    }, 500);
+    
     initMagneticButtons();
     initCustomCursor();
 });
+
+// Backup initialization using window.onload
+window.addEventListener('load', function() {
+    console.log('Window fully loaded - backup countdown initialization...');
+    
+    // Always try to reinitialize countdown to ensure it works
+    setTimeout(() => {
+        console.log('Running backup countdown initialization...');
+        
+        // Force reinitialize the countdown
+        const countdownContainer = document.getElementById('diwaliCountdown');
+        if (countdownContainer) {
+            console.log('Found countdown container, forcing update...');
+            
+            // Manually trigger an update
+            updateCountdown();
+            
+            // Start the interval again as a backup
+            setInterval(updateCountdown, 1000);
+        }
+    }, 2000);
+});
+
+// Additional manual trigger for testing
+setTimeout(() => {
+    console.log('Manual countdown trigger after 3 seconds...');
+    if (typeof updateCountdown === 'function') {
+        updateCountdown();
+        
+        // Force update the display with current time
+        const now = new Date();
+        const currentSeconds = now.getSeconds();
+        const currentMinutes = now.getMinutes();
+        const currentHours = now.getHours();
+        
+        console.log('Current time for testing:', {
+            hours: currentHours,
+            minutes: currentMinutes, 
+            seconds: currentSeconds
+        });
+        
+        // Test by setting the seconds element to current seconds to verify it's working
+        const secondsElement = document.getElementById('seconds');
+        if (secondsElement) {
+            console.log('Testing: Setting seconds to current seconds:', currentSeconds);
+            secondsElement.textContent = currentSeconds.toString().padStart(2, '0');
+            
+            // Change it back after 2 seconds to show it's dynamic
+            setTimeout(() => {
+                console.log('Reverting to countdown...');
+                updateCountdown();
+            }, 2000);
+        }
+    }
+}, 3000);
 
 // Initialize all 3D effects
 createParticles();
