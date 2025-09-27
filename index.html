@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUMBHARBAJAR - Connect Potters to Online Market</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-container">
+            <!-- Welcome Logo Section -->
+            <div class="welcome-logo">
+                <div class="welcome-pot-icon">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <h1 class="welcome-title">Welcome to</h1>
+                <div class="welcome-brand-container">
+                    <img src="logo.png" alt="KUMBHARBAJAR Logo" class="logo-image welcome-logo-image">
+                    <h1 class="welcome-brand">KUMBHARBAJAR</h1>
+                </div>
+                <p class="welcome-subtitle">Traditional Pottery Meets Modern Marketplace</p>
+            </div>
+            
+            <!-- Welcome Animation Section -->
+            <div class="welcome-animation">
+                <div class="welcome-pottery-showcase">
+                    <div class="welcome-pot welcome-pot-1"></div>
+                    <div class="welcome-pot welcome-pot-2"></div>
+                    <div class="welcome-pot welcome-pot-3"></div>
+                    <div class="welcome-pot welcome-pot-4"></div>
+                </div>
+            </div>
+            
+            <!-- Welcome Loading Section -->
+            <div class="welcome-loading">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <p class="loading-text">Loading Traditional Artistry...</p>
+            </div>
+        </div>
+        
+        <!-- Welcome Particles -->
+        <div class="welcome-particles">
+            <div class="welcome-particle"></div>
+            <div class="welcome-particle"></div>
+            <div class="welcome-particle"></div>
+            <div class="welcome-particle"></div>
+            <div class="welcome-particle"></div>
+            <div class="welcome-particle"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="KUMBHARBAJAR Logo" class="logo-image">
+                <h2>KUMBHARBAJAR</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#register">Join Us</a></li>
+                <li><a href="#custom">Custom Orders</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="themeBtn" title="Change Theme">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <div class="theme-options" id="themeOptions">
+                        <div class="theme-option" data-theme="earth" title="Earth Theme">
+                            <div class="theme-preview earth-preview"></div>
+                            <span>Earth</span>
+                        </div>
+                        <div class="theme-option" data-theme="ocean" title="Ocean Theme">
+                            <div class="theme-preview ocean-preview"></div>
+                            <span>Ocean</span>
+                        </div>
+                        <div class="theme-option" data-theme="sunset" title="Sunset Theme">
+                            <div class="theme-preview sunset-preview"></div>
+                            <span>Sunset</span>
+                        </div>
+                        <div class="theme-option" data-theme="forest" title="Forest Theme">
+                            <div class="theme-preview forest-preview"></div>
+                            <span>Forest</span>
+                        </div>
+                        <div class="theme-option" data-theme="royal" title="Royal Theme">
+                            <div class="theme-preview royal-preview"></div>
+                            <span>Royal</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Shopping Cart -->
+                <div class="cart-container">
+                    <button class="cart-btn" id="cartBtn" title="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cursor Reactive Background -->
+    <div class="cursor-reactive-bg" id="cursorReactiveBg">
+        <div class="cursor-trail" id="cursorTrail"></div>
+        <div class="floating-pottery" id="floatingPottery"></div>
+        <div class="magnetic-field" id="magneticField"></div>
+        <div class="dynamic-particles" id="dynamicParticles"></div>
+        <div class="interactive-grid" id="interactiveGrid"></div>
+    </div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- 3D Particle System -->
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <h1 data-text="Traditional Pottery Meets Modern Marketplace">Traditional Pottery Meets Modern Marketplace</h1>
+            <p data-text="Discover authentic handcrafted pottery from skilled artisans across India. Connect with traditional potters and bring home unique ceramic treasures.">Discover authentic handcrafted pottery from skilled artisans across India. Connect with traditional potters and bring home unique ceramic treasures.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#register" class="btn btn-secondary">Join as Potter</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="potter-image-container">
+                <img src="potter.webp" alt="Traditional Potter Making Pottery" class="potter-image">
+                <div class="image-overlay">
+                    <div class="overlay-text">
+                        <h3>Master Artisans at Work</h3>
+                        <p>Handcrafted with Love & Tradition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Support Artisans</h3>
+                    <p>Direct connection between potters and customers, ensuring fair pricing and authentic craftsmanship.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>Secure packaging and nationwide delivery to bring pottery treasures to your doorstep.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Custom Orders</h3>
+                    <p>Get personalized pottery pieces designed according to your specific requirements.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Authentic Quality</h3>
+                    <p>Every piece is verified for authenticity and quality by our expert team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Showcase -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Discover our curated collection of handcrafted pottery</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-product-id="1">
+                    <div class="product-image">
+                        <img src="claypots.webp">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="1">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Traditional Clay Pots</h3>
+                        <p>Handcrafted earthenware perfect for cooking and storage</p>
+                        <span class="price">₹299 - ₹899</span>
+                        <button class="btn btn-small view-details" data-product-id="1">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="2">
+                    <div class="product-image">
+                        <img src="vases.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="2">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Decorative Vases</h3>
+                        <p>Beautiful ceramic vases for home decoration</p>
+                        <span class="price">₹499 - ₹1,299</span>
+                        <button class="btn btn-small view-details" data-product-id="2">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="3">
+                    <div class="product-image">
+                        <img src="tea.webp">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="3">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tea Cups & Sets</h3>
+                        <p>Traditional terracotta cups for authentic tea experience</p>
+                        <span class="price">₹199 - ₹699</span>
+                        <button class="btn btn-small view-details" data-product-id="3">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="4">
+                    <div class="product-image">
+                        <img src="plant.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="4">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Planters</h3>
+                        <p>Eco-friendly clay planters for your garden</p>
+                        <span class="price">₹399 - ₹999</span>
+                        <button class="btn btn-small view-details" data-product-id="4">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="5">
+                    <div class="product-image">
+                        <img src="bottle.jpeg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="5">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Water Bottles</h3>
+                        <p>Natural clay bottles for cool, pure water</p>
+                        <span class="price">₹349 - ₹799</span>
+                        <button class="btn btn-small view-details" data-product-id="5">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="6">
+                    <div class="product-image">
+                        <img src="diya.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="6">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Lamps & Diyas</h3>
+                        <p>Traditional clay lamps for festivals and decoration</p>
+                        <span class="price">₹99 - ₹399</span>
+                        <button class="btn btn-small view-details" data-product-id="6">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="7">
+                    <div class="product-image">
+                        <img src="claypots.webp">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="7">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Clay Bowls</h3>
+                        <p>Handmade clay bowls for serving and dining</p>
+                        <span class="price">₹199 - ₹599</span>
+                        <button class="btn btn-small view-details" data-product-id="7">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="8">
+                    <div class="product-image">
+                        <img src="dolls.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="8">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Decorative Figurines</h3>
+                        <p>Artistic clay figurines and sculptures</p>
+                        <span class="price">₹599 - ₹1,999</span>
+                        <button class="btn btn-small view-details" data-product-id="8">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="9">
+                    <div class="product-image">
+                        <img src="storage.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="9">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Storage Jars</h3>
+                        <p>Large clay jars for food and grain storage</p>
+                        <span class="price">₹799 - ₹2,299</span>
+                        <button class="btn btn-small view-details" data-product-id="9">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="10">
+                    <div class="product-image">
+                        <img src="dinner.jpg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="10">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Terracotta dinner sets</h3>
+                        <p>Traditional dining plates made from pure clay</p>
+                        <span class="price">₹149 - ₹449</span>
+                        <button class="btn btn-small view-details" data-product-id="10">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="11">
+                    <div class="product-image">
+                        <img src="chimes.jpeg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="11">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Clay Wind Chimes</h3>
+                        <p>Musical clay wind chimes for peaceful ambiance</p>
+                        <span class="price">₹299 - ₹799</span>
+                        <button class="btn btn-small view-details" data-product-id="11">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="12">
+                    <div class="product-image">
+                        <img src="cool.jpeg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="12">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Earthen Coolers</h3>
+                        <p>Natural clay water coolers for summer</p>
+                        <span class="price">₹1,299 - ₹3,499</span>
+                        <button class="btn btn-small view-details" data-product-id="12">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="13">
+                    <div class="product-image">
+                        <img src="tea.jpeg">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="13">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Kulhad Tea Cups</h3>
+                        <p>Traditional Indian clay cups for chai</p>
+                        <span class="price">₹99 - ₹299</span>
+                        <button class="btn btn-small view-details" data-product-id="13">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="14">
+                    <div class="product-image">
+                        <img src="matka.avif">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="14">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Matka Water Pots</h3>
+                        <p>Traditional water storage earthen pots</p>
+                        <span class="price">₹399 - ₹1,199</span>
+                        <button class="btn btn-small view-details" data-product-id="14">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-product-id="15">
+                    <div class="product-image">
+                        <img src="cookpots.avif">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary add-to-cart" data-product-id="15">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Clay Cooking Pots</h3>
+                        <p>Traditional handi and earthen cookware</p>
+                        <span class="price">₹599 - ₹1,799</span>
+                        <button class="btn btn-small view-details" data-product-id="15">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potter Registration Section -->
+    <section id="register" class="register">
+        <div class="container">
+            <div class="register-content">
+                <div class="register-info">
+                    <h2>Join Our Community of Artisans</h2>
+                    <p>Are you a skilled potter looking to reach a wider audience? Join KUMBHARBAJAR and connect with customers who appreciate authentic craftsmanship.</p>
+                    <div class="benefits">
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Direct customer connection</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Fair pricing and payments</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Marketing support</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Secure payment processing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="register-form">
+                    <h3>Register as a Potter</h3>
+                    <form id="potterForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="location" name="location" placeholder="Location/City" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="experience" name="experience" placeholder="Tell us about your pottery experience and specialties" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="portfolio" name="portfolio" accept="image/*" multiple>
+                            <label for="portfolio" class="file-label">
+                                <i class="fas fa-upload"></i> Upload Portfolio Images
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Submit Registration</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Orders Section -->
+    <section id="custom" class="custom-orders">
+        <div class="container">
+            <div class="section-header">
+                <h2>Custom Pottery Orders</h2>
+                <p>Get personalized pottery pieces designed according to your specifications</p>
+            </div>
+            <div class="custom-content">
+                <div class="custom-info">
+                    <div class="custom-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Describe Your Vision</h3>
+                            <p>Tell us about your custom pottery requirements - size, shape, color, and purpose.</p>
+                        </div>
+                    </div>
+                    <div class="custom-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Choose Your Artisan</h3>
+                            <p>We'll connect you with skilled potters who specialize in your type of project.</p>
+                        </div>
+                    </div>
+                    <div class="custom-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Receive Your Creation</h3>
+                            <p>Get your custom-made pottery delivered to your doorstep with care.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-form">
+                    <h3>Request Custom Order</h3>
+                    <form id="customForm">
+                        <div class="form-group">
+                            <select id="productType" name="productType" required>
+                                <option value="">Select Product Type</option>
+                                <option value="pot">Pot/Container</option>
+                                <option value="vase">Vase</option>
+                                <option value="cup">Cup/Mug</option>
+                                <option value="planter">Planter</option>
+                                <option value="lamp">Lamp/Diya</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="customSize" name="customSize" placeholder="Size Requirements (e.g., 12 inches height)" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="customDescription" name="customDescription" placeholder="Detailed description of your custom pottery piece" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="customBudget" name="customBudget" placeholder="Budget Range (e.g., ₹500-1000)" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="customTimeline" name="customTimeline" placeholder="Preferred Timeline" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="customContact" name="customContact" placeholder="Your Contact Information" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Submit Custom Order Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <p>Have questions? We'd love to hear from you</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Pottery Lane<br>Artisan District, New Delhi - 110001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@kumbharbajar.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="contactName" name="contactName" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="contactSubject" name="contactSubject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" name="contactMessage" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diwali Offer Section -->
+    <section class="diwali-offer" id="diwaliOffer">
+        <div class="container">
+            <div class="offer-content">
+                <div class="offer-text">
+                    <h2>🎉 Diwali Special Offer! 🎇</h2>
+                    <h3>Up to 30% Off on Orders Above ₹2999</h3>
+                    <p>Offer valid until Diwali 2025 (October 26th)</p>
+                    <div class="countdown" id="diwaliCountdown">
+                        <div class="countdown-item">
+                            <span id="days">00</span>
+                            <span>Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours">00</span>
+                            <span>Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes">00</span>
+                            <span>Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds">00</span>
+                            <span>Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="offer-image">
+                    <img src="diwali-banner.jpg" alt="Diwali Offer" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo-container">
+                        <img src="logo.png" alt="KUMBHARBAJAR Logo" class="logo-image footer-logo">
+                        <h3>KUMBHARBAJAR</h3>
+                    </div>
+                    <p>Connecting traditional potters with modern marketplace. Preserving heritage through technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#register">Join as Potter</a></li>
+                        <li><a href="#custom">Custom Orders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get updates on new products and artisan stories.</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-small">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KUMBHARBAJAR. All rights reserved. | Made with <i class="fas fa-heart"></i> for pottery lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h3><i class="fas fa-shopping-cart"></i> Shopping Cart</h3>
+                <button class="cart-close" id="cartClose">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <a href="#products" class="btn btn-primary">Start Shopping</a>
+                </div>
+            </div>
+            <div class="cart-footer" id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <span>Total: ₹<span id="cartTotal">0</span></span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn btn-secondary" id="clearCart">Clear Cart</button>
+                    <button class="btn btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h3 id="modalProductName">Product Details</h3>
+                <button class="product-close" id="productClose">&times;</button>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-image">
+                    <img id="modalProductImage" src="" alt="">
+                </div>
+                <div class="product-modal-info">
+                    <p id="modalProductDescription"></p>
+                    <div class="product-modal-price">
+                        <span>Price: ₹<span id="modalProductPrice"></span></span>
+                    </div>
+                    <div class="product-modal-actions">
+                        <button class="btn btn-primary" id="modalAddToCart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
