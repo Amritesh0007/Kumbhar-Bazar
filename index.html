@@ -63,12 +63,13 @@
                 <h2>KUMBHARBAJAR</h2>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
                 
                 <li><a href="#register">Join Us</a></li>
                 <li><a href="#custom">Custom Orders</a></li>
                 <li><a href="#contact">Contact</a></li>
+
+                <li><a href="dashboard.html">Orders</a></li>
             </ul>
             <div class="nav-actions">
                 <!-- Theme Switcher -->
@@ -583,6 +584,84 @@
         </div>
     </section>
 
+    <!-- How It's Made Section -->
+    <section class="how-its-made" id="how-its-made">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It's Made</h2>
+                <p>Discover the traditional process of creating beautiful pottery</p>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://youtu.be/TLKyolNrRIQ?si=COYjjAtRdWmagBIi" target="_blank">
+                            <img src="prepara.jpeg" alt="Clay Preparation" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Clay Preparation</h3>
+                        <p>Learn how clay is prepared and processed for pottery making</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://youtu.be/DQfBn0Qc5TI?si=0fscAFVUsiPdi4aS" target="_blank">
+                            <img src="potter.webp" alt="Shaping on Wheel" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Shaping on Wheel</h3>
+                        <p>Watch how potters shape clay on the wheel to create symmetrical forms</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://www.youtube.com/watch?v=5Xa6YnI3G5s" target="_blank">
+                            <img src="drying.jpeg" alt="Drying Process" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Drying Process</h3>
+                        <p>See how pottery is carefully dried to prepare for firing</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://youtu.be/aAmVPuw2MPQ?si=IRi32DEh5eTloOQx" target="_blank">
+                            <img src="klinn.jpeg" alt="Kiln Firing" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Kiln Firing</h3>
+                        <p>Discover the firing process that transforms clay into durable pottery</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://www.youtube.com/watch?v=9HkWdXwN9gY" target="_blank">
+                            <img src="glazing.jpeg" alt="Glazing Techniques" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Glazing Techniques</h3>
+                        <p>Learn about applying glazes for color and protection</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <a href="https://www.youtube.com/watch?v=aBcDeFgHiJk" target="_blank">
+                            <img src="vases.jpg" alt="Final Touches" class="video-preview">
+                        </a>
+                    </div>
+                    <div class="video-info">
+                        <h3>Final Touches</h3>
+                        <p>See the final steps in creating beautiful pottery pieces</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Diwali Offer Section -->
     <section class="diwali-offer" id="diwaliOffer">
         <div class="container">
@@ -590,7 +669,7 @@
                 <div class="offer-text">
                     <h2>🎉 Diwali Special Offer! 🎇</h2>
                     <h3>Up to 30% Off on Orders Above ₹2999</h3>
-                    <p>Offer valid until Diwali 2025 (October 26th)</p>
+                    <p>Offer valid until Diwali 2025 (October 21th)</p>
                     <div class="countdown" id="diwaliCountdown">
                         <div class="countdown-item">
                             <span id="days">27</span>
@@ -715,6 +794,26 @@
                         <button class="btn btn-primary" id="modalAddToCart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Button -->
+    <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbotButton">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>Chat with us</h3>
+                <button id="closeChatbot">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">Hello! How can I help you today?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>

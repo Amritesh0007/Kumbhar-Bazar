@@ -275,6 +275,8 @@ function initTiltEffect() {
 
 // 3D Card Flip Effect
 function initCardFlipEffect() {
+    // Removed card flip effect to prevent flickering
+    /*
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
@@ -301,20 +303,22 @@ function initCardFlipEffect() {
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
         });
     });
+    */
 }
 
 // 3D Button Effects
 function initButtonEffects() {
+    // Simplified button effects to prevent flickering
     const buttons = document.querySelectorAll('.btn');
     
     buttons.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
-            btn.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-3px) scale(1.05)';
-            btn.style.boxShadow = '0 10px 25px rgba(139, 69, 19, 0.3)';
+            btn.style.transform = 'translateY(-2px)';
+            btn.style.boxShadow = '0 5px 15px rgba(139, 69, 19, 0.2)';
         });
         
         btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0px) scale(1)';
+            btn.style.transform = 'translateY(0)';
             btn.style.boxShadow = '';
         });
     });
@@ -694,7 +698,7 @@ function initMagneticButtons() {
 }
 
 // Shopping Cart System
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentProductId = null;
 
 // Product Data
@@ -958,18 +962,29 @@ function updateCountdown() {
 
 // Cart Functions
 function addToCart(productId) {
+    console.log('addToCart function called with productId:', productId);
+    console.log('Products object:', products);
+    console.log('Product for ID:', products[productId]);
+    
     const product = products[productId];
-    if (!product) return;
+    if (!product) {
+        console.error('Product not found for ID:', productId);
+        return;
+    }
+    
+    console.log('Product found:', product);
 
     const existingItem = cart.find(item => item.id === productId);
     
     if (existingItem) {
         existingItem.quantity += 1;
+        console.log('Increased quantity of existing item. New quantity:', existingItem.quantity);
     } else {
         cart.push({
             ...product,
             quantity: 1
         });
+        console.log('Added new item to cart');
     }
     
     updateCartDisplay();
@@ -978,15 +993,212 @@ function addToCart(productId) {
 }
 
 function removeFromCart(productId) {
+    console.log('Removing product from cart. Product ID:', productId);
     cart = cart.filter(item => item.id !== productId);
+    console.log('Cart after removal:', cart);
     updateCartDisplay();
 }
 
+//dashboard 
+// ...existing code...
+
+// --- Dashboard & Order Saving Logic ---
+
+/**
+ * Save the current cart as an order and clear the cart.
+ * Redirect to dashboard.html after payment.
+ */
+function saveOrderAndRedirect() {
+    if (!cart || cart.length === 0) {
+        showNotification('Your cart is empty!', 'error');
+        return;
+    }
+
+    // Prepare order data
+    const order = {
+        date: new Date().toLocaleString(),
+        items: cart.map(item => ({
+            name: item.name,
+            qty: item.quantity,
+            price: item.price
+        })),
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    };
+
+    // Save to localStorage
+    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Clear cart
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+
+    // Redirect to dashboard
+    window.location.href = 'dashboard.html';
+}
+
+// --- Update Cart Modal Checkout Button ---
+
+function initCartModal() {
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const cartClose = document.getElementById('cartClose');
+    const cartItems = document.getElementById('cartItems');
+
+    // ...existing code...
+
+    // Clear cart button
+    const clearCartBtn = document.getElementById('clearCart');
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', () => {
+            cart = [];
+            updateCartDisplay();
+        });
+    }
+
+    // Checkout button
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                // Simulate payment process
+                if (confirm('Proceed to payment?')) {
+                    saveOrderAndRedirect();
+                }
+            } else {
+                showNotification('Your cart is empty!', 'error');
+            }
+        });
+    }
+}
+
+// ...existing code...
+
+// Chatbot Functionality
+function initChatbot() {
+    const chatbotButton = document.getElementById('chatbotButton');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const closeChatbot = document.getElementById('closeChatbot');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const sendButton = document.getElementById('sendButton');
+    
+    // Toggle chat window visibility
+    function toggleChatbot() {
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            // Focus input when opening
+            chatbotInput.focus();
+        }
+    }
+    
+    // Close chatbot
+    function closeChatbotWindow() {
+        chatbotWindow.classList.remove('active');
+    }
+    
+    // Add a message to the chat
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        messageDiv.textContent = message;
+        chatbotMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Generate bot response based on user message
+    function getBotResponse(userMessage) {
+        const lowerMessage = userMessage.toLowerCase();
+        
+        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+            return 'Hello! Welcome to KUMBHARBAJAR. How can I help you today?';
+        } else if (lowerMessage.includes('pottery') || lowerMessage.includes('clay') || lowerMessage.includes('ceramic')) {
+            return 'We offer a wide variety of handmade pottery items including traditional clay pots, decorative vases, tea cups, planters, and more. All our products are crafted by skilled artisans using traditional techniques.';
+        } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('expensive')) {
+            return 'Our prices vary depending on the item and its size. Traditional clay pots start at ₹599, decorative vases at ₹699, and tea cups at ₹324. We offer fair pricing directly from the artisans.';
+        } else if (lowerMessage.includes('delivery') || lowerMessage.includes('shipping') || lowerMessage.includes('deliver')) {
+            return 'We offer nationwide delivery with secure packaging. Delivery typically takes 3-7 business days depending on your location. We provide tracking information once your order ships.';
+        } else if (lowerMessage.includes('custom') || lowerMessage.includes('special') || lowerMessage.includes('unique')) {
+            return 'Yes! We offer custom pottery orders. You can request personalized pieces with specific sizes, colors, and designs. Visit our Custom Orders section to submit your request.';
+        } else if (lowerMessage.includes('artisan') || lowerMessage.includes('potter') || lowerMessage.includes('maker')) {
+            return 'We connect customers directly with traditional potters across India. If you\'re an artisan looking to join our platform, visit our Join as Potter section to register.';
+        } else if (lowerMessage.includes('thank')) {
+            return 'You\'re welcome! Is there anything else I can help you with?';
+        } else if (lowerMessage.includes('bye') || lowerMessage.includes('goodbye') || lowerMessage.includes('exit')) {
+            return 'Thank you for chatting with us! Have a wonderful day.';
+        } else {
+            return 'I\'m here to help with questions about our pottery products, ordering process, delivery, or becoming an artisan. Could you please specify what you\'d like to know?';
+        }
+    }
+    
+    // Send message
+    function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message) {
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            chatbotInput.value = '';
+            
+            // Simulate typing delay
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                addMessage(botResponse, false);
+            }, 500 + Math.random() * 1000); // Random delay between 0.5-1.5 seconds
+        }
+    }
+    
+    // Event listeners
+    if (chatbotButton) {
+        chatbotButton.addEventListener('click', toggleChatbot);
+    }
+    
+    if (closeChatbot) {
+        closeChatbot.addEventListener('click', closeChatbotWindow);
+    }
+    
+    if (sendButton) {
+        sendButton.addEventListener('click', sendMessage);
+    }
+    
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+    
+    // Close chatbot when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!chatbotWindow.contains(e.target) && !chatbotButton.contains(e.target) && chatbotWindow.classList.contains('active')) {
+            closeChatbotWindow();
+        }
+    });
+}
+
+// Initialize chatbot when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initWelcomeScreen();
+    initThemeSystem();
+    initChatbot();
+});
+
 function updateQuantity(productId, change) {
+    console.log('Updating quantity. Product ID:', productId, 'Change:', change);
     const item = cart.find(item => item.id === productId);
-    if (!item) return;
+    if (!item) {
+        console.error('Item not found in cart for ID:', productId);
+        return;
+    }
 
     item.quantity += change;
+    console.log('New quantity:', item.quantity);
     
     if (item.quantity <= 0) {
         removeFromCart(productId);
@@ -996,57 +1208,130 @@ function updateQuantity(productId, change) {
 }
 
 function updateCartDisplay() {
+    console.log('updateCartDisplay function called');
+    console.log('Current cart contents:', cart);
+    
     const cartCount = document.getElementById('cartCount');
     const cartItems = document.getElementById('cartItems');
     const cartFooter = document.getElementById('cartFooter');
     const cartTotal = document.getElementById('cartTotal');
     
+    // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
     // Update cart count
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
+    console.log('Total items in cart:', totalItems);
+    
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+        console.log('Updated cart count display');
+    } else {
+        console.error('Cart count element not found');
+    }
     
     // Update cart items
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
-                <a href="#products" class="btn btn-primary">Start Shopping</a>
-            </div>
-        `;
-        cartFooter.style.display = 'none';
+    if (cartItems) {
+        if (cart.length === 0) {
+            cartItems.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                    <a href="#products" class="btn btn-primary">Start Shopping</a>
+                </div>
+            `;
+            console.log('Cart is empty, showing empty message');
+        } else {
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">₹${item.price}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button class="remove-item" onclick="removeFromCart(${item.id})" title="Remove item">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            console.log('Updated cart items display');
+        }
     } else {
-        cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-image">
-                    <img src="${item.image}" alt="${item.name}">
-                </div>
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <div class="cart-item-price">₹${item.price}</div>
-                </div>
-                <div class="cart-item-actions">
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                    <span class="quantity">${item.quantity}</span>
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                    <button class="remove-item" onclick="removeFromCart(${item.id})" title="Remove item">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-        `).join('');
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        cartTotal.textContent = total;
-        cartFooter.style.display = 'block';
+        console.error('Cart items element not found');
     }
+    
+    if (cartTotal) {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        console.log('Cart total:', total);
+        cartTotal.textContent = total;
+    } else {
+        console.error('Cart total element not found');
+    }
+    
+    if (cartFooter) {
+        cartFooter.style.display = cart.length > 0 ? 'block' : 'none';
+        console.log('Updated cart footer display');
+    } else {
+        console.error('Cart footer element not found');
+    }
+}
+
+// Add to Cart Buttons
+function initAddToCartButtons() {
+    console.log('Initializing Add to Cart Buttons...');
+    
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        console.log('Found', addToCartBtns.length, 'add-to-cart buttons');
+        
+        if (addToCartBtns.length === 0) {
+            console.warn('No add to cart buttons found');
+            return;
+        }
+        
+        // Remove any existing event listeners to prevent duplicates
+        addToCartBtns.forEach(btn => {
+            // Create a new button with the same properties
+            const newBtn = document.createElement('button');
+            newBtn.className = btn.className;
+            newBtn.setAttribute('data-product-id', btn.getAttribute('data-product-id'));
+            newBtn.textContent = btn.textContent;
+            
+            // Replace the old button with the new one
+            btn.parentNode.replaceChild(newBtn, btn);
+            
+            // Add click event listener to the new button
+            newBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productId = parseInt(this.getAttribute('data-product-id'));
+                console.log('Add to cart button clicked for product ID:', productId);
+                
+                if (productId && products[productId]) {
+                    addToCart(productId);
+                } else {
+                    console.error('Invalid product ID or product not found:', productId);
+                    showNotification('Error adding product to cart', 'error');
+                }
+            });
+        });
+    }, 100);
 }
 
 // Product Modal System
 function initProductModal() {
+    console.log('Initializing Product Modal System...');
     const productModal = document.getElementById('productModal');
     const productClose = document.getElementById('productClose');
-    const viewDetailBtns = document.querySelectorAll('.view-details');
     const modalProductName = document.getElementById('modalProductName');
     const modalProductImage = document.getElementById('modalProductImage');
     const modalProductDescription = document.getElementById('modalProductDescription');
@@ -1060,43 +1345,73 @@ function initProductModal() {
         return;
     }
     
-    // View details buttons
-    viewDetailBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const productId = parseInt(btn.getAttribute('data-product-id'));
-            const product = products[productId];
+    // Handle view details buttons
+    setTimeout(() => {
+        const viewDetailBtns = document.querySelectorAll('.view-details');
+        console.log('Found', viewDetailBtns.length, 'view-details buttons');
+        
+        viewDetailBtns.forEach(btn => {
+            // Create a new button with the same properties
+            const newBtn = document.createElement('button');
+            newBtn.className = btn.className;
+            newBtn.setAttribute('data-product-id', btn.getAttribute('data-product-id'));
+            newBtn.textContent = btn.textContent;
             
-            // Find the product card to get the image source
-            const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
-            let productImageSrc = '';
+            // Replace the old button with the new one
+            btn.parentNode.replaceChild(newBtn, btn);
             
-            if (productCard) {
-                const productImage = productCard.querySelector('.product-image img');
-                if (productImage) {
-                    productImageSrc = productImage.src;
-                }
-            }
-            
-            if (product) {
-                currentProductId = productId;
-                modalProductName.textContent = product.name;
-                // Use the image from the product card instead of the products object
-                modalProductImage.src = productImageSrc || product.image;
-                modalProductImage.alt = product.name;
-                modalProductDescription.textContent = product.description;
-                modalProductPrice.textContent = product.price;
+            // Add click event listener to the new button
+            newBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 
-                productModal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            }
+                const productId = parseInt(this.getAttribute('data-product-id'));
+                console.log('View detail button clicked for product ID:', productId);
+                const product = products[productId];
+                
+                if (product) {
+                    // Find the product card to get the image source
+                    const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+                    let productImageSrc = '';
+                    
+                    if (productCard) {
+                        const productImage = productCard.querySelector('.product-image img');
+                        if (productImage) {
+                            productImageSrc = productImage.src;
+                        }
+                    }
+                    
+                    currentProductId = productId;
+                    modalProductName.textContent = product.name;
+                    modalProductImage.src = productImageSrc || product.image;
+                    modalProductImage.alt = product.name;
+                    modalProductDescription.textContent = product.description;
+                    modalProductPrice.textContent = product.price;
+                    
+                    productModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    console.error('Product not found for ID:', productId);
+                    showNotification('Product not found', 'error');
+                }
+            });
         });
-    });
+    }, 100);
     
-    // Close product modal
-    productClose.addEventListener('click', () => {
-        productModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+    // Handle close button for product modal
+    setTimeout(() => {
+        const newProductClose = document.createElement('button');
+        newProductClose.id = 'productClose';
+        newProductClose.className = productClose.className;
+        newProductClose.innerHTML = productClose.innerHTML;
+        
+        productClose.parentNode.replaceChild(newProductClose, productClose);
+        
+        newProductClose.addEventListener('click', () => {
+            productModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }, 100);
     
     // Close on backdrop click
     productModal.addEventListener('click', (e) => {
@@ -1106,322 +1421,89 @@ function initProductModal() {
         }
     });
     
-    // Add to cart from modal
-    modalAddToCart.addEventListener('click', () => {
-        if (currentProductId) {
-            addToCart(currentProductId);
-            productModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+    // Handle add to cart from modal
+    setTimeout(() => {
+        const newModalAddToCart = document.createElement('button');
+        newModalAddToCart.id = 'modalAddToCart';
+        newModalAddToCart.className = modalAddToCart.className;
+        newModalAddToCart.textContent = modalAddToCart.textContent;
+        
+        modalAddToCart.parentNode.replaceChild(newModalAddToCart, modalAddToCart);
+        
+        newModalAddToCart.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Add to cart from modal clicked. Current product ID:', currentProductId);
+            
+            if (currentProductId && products[currentProductId]) {
+                addToCart(currentProductId);
+                productModal.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                console.error('Invalid product ID or product not found in modal:', currentProductId);
+                showNotification('Error adding product to cart', 'error');
+            }
+        });
+    }, 100);
 }
 
-// Add to Cart Buttons
-function initAddToCartButtons() {
-    const addToCartBtns = document.querySelectorAll('.add-to-cart');
+// Cart Modal System
+function initCartModal() {
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const cartClose = document.getElementById('cartClose');
+    const cartItems = document.getElementById('cartItems');
     
-    // Check if there are any add to cart buttons
-    if (addToCartBtns.length === 0) {
-        console.warn('No add to cart buttons found');
+    // Check if cart elements exist
+    if (!cartBtn || !cartModal || !cartClose) {
+        console.warn('Cart modal elements not found in DOM');
         return;
     }
     
-    addToCartBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const productId = parseInt(btn.getAttribute('data-product-id'));
-            addToCart(productId);
-        });
-    });
-}
-
-// Cursor Reactive Effects System
-let mouseX = 0, mouseY = 0;
-let isMouseMoving = false;
-let mouseTimeout;
-
-// Custom Cursor
-function initCustomCursor() {
-    const cursor = document.getElementById('customCursor');
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-        
-        isMouseMoving = true;
-        clearTimeout(mouseTimeout);
-        
-        mouseTimeout = setTimeout(() => {
-            isMouseMoving = false;
-        }, 100);
+    // Open cart modal
+    cartBtn.addEventListener('click', () => {
+        cartModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
     
-    // Cursor interactions with elements
-    const interactiveElements = document.querySelectorAll('a, button, .product-card, .feature-card');
-    
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'scale(2)';
-            cursor.style.background = 'radial-gradient(circle, var(--primary-color), var(--gold))';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'scale(1)';
-            cursor.style.background = 'radial-gradient(circle, var(--gold), var(--primary-color))';
-        });
+    // Close cart modal
+    cartClose.addEventListener('click', () => {
+        cartModal.classList.remove('active');
+        document.body.style.overflow = '';
     });
-}
-
-// Cursor Trail Effect
-function initCursorTrail() {
-    const trail = document.getElementById('cursorTrail');
-    let trailElements = [];
     
-    document.addEventListener('mousemove', (e) => {
-        const trailElement = document.createElement('div');
-        trailElement.className = 'cursor-trail';
-        trailElement.style.left = e.clientX + 'px';
-        trailElement.style.top = e.clientY + 'px';
-        trailElement.style.opacity = '1';
-        
-        trail.appendChild(trailElement);
-        trailElements.push(trailElement);
-        
-        // Remove old trail elements
-        if (trailElements.length > 10) {
-            const oldElement = trailElements.shift();
-            oldElement.remove();
+    // Close on backdrop click
+    cartModal.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.classList.remove('active');
+            document.body.style.overflow = '';
         }
-        
-        // Fade out trail elements
-        setTimeout(() => {
-            trailElement.style.opacity = '0';
-            setTimeout(() => {
-                trailElement.remove();
-                const index = trailElements.indexOf(trailElement);
-                if (index > -1) {
-                    trailElements.splice(index, 1);
-                }
-            }, 1000);
-        }, 500);
     });
-}
-
-// Floating Pottery Elements
-function initFloatingPottery() {
-    const floatingPottery = document.getElementById('floatingPottery');
-    const potCount = 15;
     
-    for (let i = 0; i < potCount; i++) {
-        const pot = document.createElement('div');
-        pot.className = 'floating-pot';
-        pot.style.left = Math.random() * 100 + '%';
-        pot.style.top = Math.random() * 100 + '%';
-        pot.style.animationDelay = Math.random() * 10 + 's';
-        pot.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        
-        floatingPottery.appendChild(pot);
+    // Clear cart button
+    const clearCartBtn = document.getElementById('clearCart');
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', () => {
+            cart = [];
+            updateCartDisplay();
+        });
     }
     
-    // Make pots react to cursor
-    document.addEventListener('mousemove', (e) => {
-        const pots = document.querySelectorAll('.floating-pot');
-        const cursorX = e.clientX;
-        const cursorY = e.clientY;
-        
-        pots.forEach((pot, index) => {
-            const rect = pot.getBoundingClientRect();
-            const potX = rect.left + rect.width / 2;
-            const potY = rect.top + rect.height / 2;
-            
-            const distance = Math.sqrt(
-                Math.pow(cursorX - potX, 2) + Math.pow(cursorY - potY, 2)
-            );
-            
-            if (distance < 150) {
-                const angle = Math.atan2(potY - cursorY, potX - cursorX);
-                const force = (150 - distance) / 150;
-                
-                pot.style.transform = `translate(${Math.cos(angle) * force * 20}px, ${Math.sin(angle) * force * 20}px) scale(${1 + force * 0.3})`;
-                pot.style.opacity = 0.3 + force * 0.4;
+    // Checkout button
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                // Save cart to localStorage before redirecting
+                localStorage.setItem('cart', JSON.stringify(cart));
+                // Redirect to payment page
+                window.location.href = 'payment.html';
             } else {
-                pot.style.transform = '';
-                pot.style.opacity = 0.3;
+                showNotification('Your cart is empty!', 'error');
             }
         });
-    });
-}
-
-// Dynamic Particles
-function initDynamicParticles() {
-    const dynamicParticles = document.getElementById('dynamicParticles');
-    const particleCount = 30;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'dynamic-particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-        
-        dynamicParticles.appendChild(particle);
     }
-    
-    // Make particles react to cursor
-    document.addEventListener('mousemove', (e) => {
-        const particles = document.querySelectorAll('.dynamic-particle');
-        const cursorX = e.clientX;
-        const cursorY = e.clientY;
-        
-        particles.forEach(particle => {
-            const rect = particle.getBoundingClientRect();
-            const particleX = rect.left + rect.width / 2;
-            const particleY = rect.top + rect.height / 2;
-            
-            const distance = Math.sqrt(
-                Math.pow(cursorX - particleX, 2) + Math.pow(cursorY - particleY, 2)
-            );
-            
-            if (distance < 100) {
-                const angle = Math.atan2(particleY - cursorY, particleX - cursorX);
-                const force = (100 - distance) / 100;
-                
-                particle.style.transform = `translate(${Math.cos(angle) * force * 30}px, ${Math.sin(angle) * force * 30}px) scale(${1 + force * 0.5})`;
-                particle.style.opacity = 0.6 + force * 0.4;
-            }
-        });
-    });
-}
-
-// Magnetic Field Effect
-function initMagneticField() {
-    const magneticField = document.getElementById('magneticField');
-    
-    document.addEventListener('mousemove', (e) => {
-        magneticField.style.left = e.clientX - 100 + 'px';
-        magneticField.style.top = e.clientY - 100 + 'px';
-        
-        // Activate magnetic field near interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .product-card, .feature-card');
-        let nearElement = false;
-        
-        interactiveElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - (rect.left + rect.width / 2), 2) +
-                Math.pow(e.clientY - (rect.top + rect.height / 2), 2)
-            );
-            
-            if (distance < 150) {
-                nearElement = true;
-            }
-        });
-        
-        if (nearElement) {
-            magneticField.classList.add('active');
-        } else {
-            magneticField.classList.remove('active');
-        }
-    });
-}
-
-// Interactive Grid
-function initInteractiveGrid() {
-    const grid = document.getElementById('interactiveGrid');
-    
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        grid.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
-        
-        // Activate grid near interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .product-card, .feature-card');
-        let nearElement = false;
-        
-        interactiveElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - (rect.left + rect.width / 2), 2) +
-                Math.pow(e.clientY - (rect.top + rect.height / 2), 2)
-            );
-            
-            if (distance < 200) {
-                nearElement = true;
-            }
-        });
-        
-        if (nearElement) {
-            grid.classList.add('active');
-        } else {
-            grid.classList.remove('active');
-        }
-    });
-}
-
-// Cursor Wave Effect
-function initCursorWave() {
-    document.addEventListener('click', (e) => {
-        const wave = document.createElement('div');
-        wave.className = 'cursor-wave';
-        wave.style.left = e.clientX - 50 + 'px';
-        wave.style.top = e.clientY - 50 + 'px';
-        
-        document.body.appendChild(wave);
-        
-        setTimeout(() => {
-            wave.remove();
-        }, 1000);
-    });
-}
-
-// Magnetic Attraction for Elements
-function initMagneticAttraction() {
-    const magneticElements = document.querySelectorAll('.btn, .product-card, .feature-card');
-    
-    magneticElements.forEach(el => {
-        el.classList.add('magnetic-element');
-        
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            el.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = '';
-        });
-    });
-}
-
-// Enhanced Particle System with Cursor Interaction
-function enhanceParticleSystem() {
-    const particles = document.querySelectorAll('.particle');
-    
-    document.addEventListener('mousemove', (e) => {
-        particles.forEach((particle, index) => {
-            const rect = particle.getBoundingClientRect();
-            const particleX = rect.left + rect.width / 2;
-            const particleY = rect.top + rect.height / 2;
-            
-            const distance = Math.sqrt(
-                Math.pow(e.clientX - particleX, 2) + Math.pow(e.clientY - particleY, 2)
-            );
-            
-            if (distance < 120) {
-                const angle = Math.atan2(particleY - e.clientY, particleX - e.clientX);
-                const force = (120 - distance) / 120;
-                
-                particle.style.transform = `translate(${Math.cos(angle) * force * 50}px, ${Math.sin(angle) * force * 50}px) scale(${1 + force * 0.5})`;
-                particle.style.opacity = 0.3 + force * 0.4;
-            }
-        });
-    });
 }
 
 // Initialize all systems when DOM is loaded
@@ -1431,18 +1513,39 @@ document.addEventListener('DOMContentLoaded', function() {
     initWelcomeScreen();
     initThemeSystem();
     initCartModal();
+    
+    // Initialize product modal and add to cart buttons
+    console.log('Initializing product modal and add to cart buttons...');
     initProductModal();
     initAddToCartButtons();
     
-    // Initialize Diwali countdown with a slight delay to ensure DOM is fully ready
+    // Initialize video previews
+    console.log('Initializing video previews...');
+    initVideoPreviews();
+    
+    // Initialize Diwali countdown
     setTimeout(() => {
-        console.log('Initializing Diwali countdown with delay...');
+        console.log('Initializing Diwali countdown...');
         initCountdown();
-    }, 500);
+    }, 300);
     
     initMagneticButtons();
     initCustomCursor();
 });
+
+// Initialize all 3D effects after a delay to ensure DOM is ready
+setTimeout(() => {
+    createParticles();
+    initTiltEffect();
+    initCardFlipEffect();
+    initButtonEffects();
+    initFormInteractions();
+    initScrollAnimations();
+    initEnhancedParallax();
+    
+    // Initialize cart display
+    updateCartDisplay();
+}, 100);
 
 // Backup initialization using window.onload
 window.addEventListener('load', function() {
@@ -1498,77 +1601,6 @@ setTimeout(() => {
         }
     }
 }, 3000);
-
-// Initialize all 3D effects
-createParticles();
-initTiltEffect();
-initCardFlipEffect();
-initButtonEffects();
-initFormInteractions();
-initScrollAnimations();
-initEnhancedParallax();
-
-// Initialize cart display
-updateCartDisplay();
-
-// Cart Modal System
-function initCartModal() {
-    const cartBtn = document.getElementById('cartBtn');
-    const cartModal = document.getElementById('cartModal');
-    const cartClose = document.getElementById('cartClose');
-    const cartItems = document.getElementById('cartItems');
-    
-    // Check if cart elements exist
-    if (!cartBtn || !cartModal || !cartClose) {
-        console.warn('Cart modal elements not found in DOM');
-        return;
-    }
-    
-    // Open cart modal
-    cartBtn.addEventListener('click', () => {
-        cartModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    // Close cart modal
-    cartClose.addEventListener('click', () => {
-        cartModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    // Close on backdrop click
-    cartModal.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            cartModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Clear cart button
-    const clearCartBtn = document.getElementById('clearCart');
-    if (clearCartBtn) {
-        clearCartBtn.addEventListener('click', () => {
-            cart = [];
-            updateCartDisplay();
-        });
-    }
-    
-    // Checkout button
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.length > 0) {
-                showNotification('Order placed successfully! Thank you for your purchase.', 'success');
-                cart = [];
-                updateCartDisplay();
-                cartModal.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                showNotification('Your cart is empty!', 'error');
-            }
-        });
-    }
-}
 
 // Add fade-in animation to hero content
 const heroContent = document.querySelector('.hero-content');
@@ -1648,3 +1680,40 @@ initMagneticButtons();
 
 // Initialize custom cursor
 initCustomCursor();
+
+// Video Preview Functionality
+function initVideoPreviews() {
+    console.log('Initializing video previews...');
+    
+    // Add click event to video containers
+    const videoContainers = document.querySelectorAll('.video-container');
+    
+    videoContainers.forEach(container => {
+        // Initially hide the iframe
+        const iframe = container.querySelector('iframe');
+        if (iframe) {
+            // Store the src in data attribute and remove src to prevent loading
+            const src = iframe.src || iframe.getAttribute('data-src');
+            if (src) {
+                iframe.setAttribute('data-src', src);
+                iframe.removeAttribute('src');
+            }
+        }
+        
+        container.addEventListener('click', function() {
+            // Add active class to container
+            this.classList.add('active');
+            
+            // Get the iframe
+            const iframe = this.querySelector('iframe');
+            
+            // If iframe doesn't have src but has data-src, set it to load the video
+            if (iframe && !iframe.src) {
+                const src = iframe.getAttribute('data-src');
+                if (src) {
+                    iframe.src = src;
+                }
+            }
+        });
+    });
+}
