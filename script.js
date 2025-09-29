@@ -67,6 +67,116 @@ function initWelcomeScreen() {
     });
 }
 
+// Theme System
+function initThemeSystem() {
+    const themeBtn = document.getElementById('themeBtn');
+    const themeOptions = document.getElementById('themeOptions');
+    
+    // Check if theme elements exist
+    if (!themeBtn || !themeOptions) {
+        console.warn('Theme elements not found in DOM');
+        return;
+    }
+    
+    // Theme button click event
+    themeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeOptions.classList.toggle('active');
+    });
+    
+    // Theme option click events
+    const themeOptionsList = document.querySelectorAll('.theme-option');
+    themeOptionsList.forEach(option => {
+        option.addEventListener('click', () => {
+            const theme = option.getAttribute('data-theme');
+            applyTheme(theme);
+            themeOptions.classList.remove('active');
+        });
+    });
+    
+    // Close theme options when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!themeBtn.contains(e.target) && !themeOptions.contains(e.target)) {
+            themeOptions.classList.remove('active');
+        }
+    });
+    
+    // Apply theme function
+    function applyTheme(theme) {
+        const root = document.documentElement;
+        
+        // Define theme colors
+        const themes = {
+            earth: {
+                '--primary-color': '#8B4513',
+                '--secondary-color': '#D2691E',
+                '--accent-color': '#F4A460',
+                '--terracotta': '#CD853F',
+                '--cream': '#F5F5DC',
+                '--warm-white': '#FFF8DC',
+                '--dark-brown': '#654321',
+                '--gold': '#DAA520'
+            },
+            ocean: {
+                '--primary-color': '#006994',
+                '--secondary-color': '#0080A3',
+                '--accent-color': '#4FC3F7',
+                '--terracotta': '#00838F',
+                '--cream': '#E1F5FE',
+                '--warm-white': '#F5FCFF',
+                '--dark-brown': '#006064',
+                '--gold': '#00B0FF'
+            },
+            sunset: {
+                '--primary-color': '#FF6B35',
+                '--secondary-color': '#F7931E',
+                '--accent-color': '#FFD23F',
+                '--terracotta': '#FF8C00',
+                '--cream': '#FFF5E6',
+                '--warm-white': '#FFFAF0',
+                '--dark-brown': '#CC5500',
+                '--gold': '#FFAA00'
+            },
+            forest: {
+                '--primary-color': '#2E7D32',
+                '--secondary-color': '#4CAF50',
+                '--accent-color': '#81C784',
+                '--terracotta': '#388E3C',
+                '--cream': '#E8F5E9',
+                '--warm-white': '#F1F8E9',
+                '--dark-brown': '#1B5E20',
+                '--gold': '#66BB6A'
+            },
+            royal: {
+                '--primary-color': '#512DA8',
+                '--secondary-color': '#7B1FA2',
+                '--accent-color': '#E1BEE7',
+                '--terracotta': '#7E57C2',
+                '--cream': '#EDE7F6',
+                '--warm-white': '#F3E5F5',
+                '--dark-brown': '#4527A0',
+                '--gold': '#AB47BC'
+            }
+        };
+        
+        // Apply theme colors
+        if (themes[theme]) {
+            Object.keys(themes[theme]).forEach(property => {
+                root.style.setProperty(property, themes[theme][property]);
+            });
+            
+            // Save theme preference to localStorage
+            localStorage.setItem('selectedTheme', theme);
+        }
+    }
+    
+    // Load saved theme on page load
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    }
+}
+
 // Initialize welcome screen when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initWelcomeScreen();
@@ -943,22 +1053,41 @@ function initProductModal() {
     const modalProductPrice = document.getElementById('modalProductPrice');
     const modalAddToCart = document.getElementById('modalAddToCart');
     
+    // Check if all required elements exist
+    if (!productModal || !productClose || !modalProductName || !modalProductImage || 
+        !modalProductDescription || !modalProductPrice || !modalAddToCart) {
+        console.error('Product modal elements not found in DOM');
+        return;
+    }
+    
     // View details buttons
     viewDetailBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const productId = parseInt(btn.getAttribute('data-product-id'));
             const product = products[productId];
             
+            // Find the product card to get the image source
+            const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+            let productImageSrc = '';
+            
+            if (productCard) {
+                const productImage = productCard.querySelector('.product-image img');
+                if (productImage) {
+                    productImageSrc = productImage.src;
+                }
+            }
+            
             if (product) {
                 currentProductId = productId;
                 modalProductName.textContent = product.name;
-                modalProductImage.src = product.image;
+                // Use the image from the product card instead of the products object
+                modalProductImage.src = productImageSrc || product.image;
                 modalProductImage.alt = product.name;
                 modalProductDescription.textContent = product.description;
                 modalProductPrice.textContent = product.price;
                 
                 productModal.classList.add('active');
-                document.body.style.overflow = '';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
             }
         });
     });
@@ -990,6 +1119,12 @@ function initProductModal() {
 // Add to Cart Buttons
 function initAddToCartButtons() {
     const addToCartBtns = document.querySelectorAll('.add-to-cart');
+    
+    // Check if there are any add to cart buttons
+    if (addToCartBtns.length === 0) {
+        console.warn('No add to cart buttons found');
+        return;
+    }
     
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1375,6 +1510,65 @@ initEnhancedParallax();
 
 // Initialize cart display
 updateCartDisplay();
+
+// Cart Modal System
+function initCartModal() {
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const cartClose = document.getElementById('cartClose');
+    const cartItems = document.getElementById('cartItems');
+    
+    // Check if cart elements exist
+    if (!cartBtn || !cartModal || !cartClose) {
+        console.warn('Cart modal elements not found in DOM');
+        return;
+    }
+    
+    // Open cart modal
+    cartBtn.addEventListener('click', () => {
+        cartModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close cart modal
+    cartClose.addEventListener('click', () => {
+        cartModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close on backdrop click
+    cartModal.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Clear cart button
+    const clearCartBtn = document.getElementById('clearCart');
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', () => {
+            cart = [];
+            updateCartDisplay();
+        });
+    }
+    
+    // Checkout button
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                showNotification('Order placed successfully! Thank you for your purchase.', 'success');
+                cart = [];
+                updateCartDisplay();
+                cartModal.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                showNotification('Your cart is empty!', 'error');
+            }
+        });
+    }
+}
 
 // Add fade-in animation to hero content
 const heroContent = document.querySelector('.hero-content');
