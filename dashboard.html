@@ -89,7 +89,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation (reuse from other pages if needed) -->
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -109,11 +109,11 @@
             <p>Track and manage your orders here</p>
         </div>
         <div class="orders-list" id="ordersList">
-            <!-- Orders will be loaded here -->
+            
         </div>
     </section>
     <script>
-    // Load orders from localStorage
+    
     document.addEventListener('DOMContentLoaded', function() {
         const orders = JSON.parse(localStorage.getItem('orders') || '[]');
         const ordersList = document.getElementById('ordersList');

@@ -1,18 +1,18 @@
-// Welcome Screen Functionality
+
 function initWelcomeScreen() {
     const welcomeScreen = document.getElementById('welcomeScreen');
     const loadingProgress = document.querySelector('.loading-progress');
     
-    // Always show welcome screen on refresh (removed localStorage check)
+
     welcomeScreen.style.display = 'flex';
     
-    // Simulate loading progress
+
     let progress = 0;
     const progressInterval = setInterval(() => {
         progress += Math.random() * 15;
         if (progress > 100) progress = 100;
         
-        // Update loading text based on progress
+
         const loadingText = document.querySelector('.loading-text');
         if (progress < 30) {
             loadingText.textContent = 'Loading Traditional Artistry...';
@@ -27,11 +27,11 @@ function initWelcomeScreen() {
         if (progress >= 100) {
             clearInterval(progressInterval);
             
-            // Hide welcome screen after completion
+
             setTimeout(() => {
                 welcomeScreen.classList.add('fade-out');
                 
-                // Remove welcome screen from DOM after animation
+
                 setTimeout(() => {
                     welcomeScreen.style.display = 'none';
                     welcomeScreen.remove();
@@ -40,7 +40,7 @@ function initWelcomeScreen() {
         }
     }, 200);
     
-    // Allow users to skip welcome screen by clicking
+
     welcomeScreen.addEventListener('click', function(e) {
         if (e.target === welcomeScreen || e.target.closest('.welcome-container')) {
             clearInterval(progressInterval);
@@ -53,7 +53,7 @@ function initWelcomeScreen() {
         }
     });
     
-    // Add keyboard support (ESC to skip)
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && welcomeScreen.style.display !== 'none') {
             clearInterval(progressInterval);
@@ -67,24 +67,24 @@ function initWelcomeScreen() {
     });
 }
 
-// Theme System
+
 function initThemeSystem() {
     const themeBtn = document.getElementById('themeBtn');
     const themeOptions = document.getElementById('themeOptions');
     
-    // Check if theme elements exist
+
     if (!themeBtn || !themeOptions) {
         console.warn('Theme elements not found in DOM');
         return;
     }
     
-    // Theme button click event
+
     themeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         themeOptions.classList.toggle('active');
     });
     
-    // Theme option click events
+
     const themeOptionsList = document.querySelectorAll('.theme-option');
     themeOptionsList.forEach(option => {
         option.addEventListener('click', () => {
@@ -94,18 +94,18 @@ function initThemeSystem() {
         });
     });
     
-    // Close theme options when clicking outside
+
     document.addEventListener('click', (e) => {
         if (!themeBtn.contains(e.target) && !themeOptions.contains(e.target)) {
             themeOptions.classList.remove('active');
         }
     });
     
-    // Apply theme function
+
     function applyTheme(theme) {
         const root = document.documentElement;
         
-        // Define theme colors
+
         const themes = {
             earth: {
                 '--primary-color': '#8B4513',
@@ -159,30 +159,30 @@ function initThemeSystem() {
             }
         };
         
-        // Apply theme colors
+
         if (themes[theme]) {
             Object.keys(themes[theme]).forEach(property => {
                 root.style.setProperty(property, themes[theme][property]);
             });
             
-            // Save theme preference to localStorage
+
             localStorage.setItem('selectedTheme', theme);
         }
     }
     
-    // Load saved theme on page load
+
     const savedTheme = localStorage.getItem('selectedTheme');
     if (savedTheme) {
         applyTheme(savedTheme);
     }
 }
 
-// Initialize welcome screen when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', function() {
     initWelcomeScreen();
 });
 
-// Mobile Navigation Toggle
+
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -191,7 +191,7 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on a link
+
 document.querySelectorAll('.nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -199,7 +199,7 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
-// Smooth scrolling for navigation links
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -213,7 +213,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background change on scroll with 3D effect
+
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
@@ -223,7 +223,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 3D Particle System
+
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     const particleCount = 50;
@@ -232,15 +232,15 @@ function createParticles() {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        // Random size between 2px and 8px
+
         const size = Math.random() * 6 + 2;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
-        // Random position
+
         particle.style.left = Math.random() * 100 + '%';
         
-        // Random animation delay
+
         particle.style.animationDelay = Math.random() * 15 + 's';
         particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
         
@@ -248,7 +248,7 @@ function createParticles() {
     }
 }
 
-// 3D Tilt Effect for Pottery
+
 function initTiltEffect() {
     const pots = document.querySelectorAll('[data-tilt]');
     
@@ -273,9 +273,9 @@ function initTiltEffect() {
     });
 }
 
-// 3D Card Flip Effect
+
 function initCardFlipEffect() {
-    // Removed card flip effect to prevent flickering
+
     /*
     const productCards = document.querySelectorAll('.product-card');
     
@@ -288,7 +288,7 @@ function initCardFlipEffect() {
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
         });
         
-        // Mouse move effect
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -306,9 +306,9 @@ function initCardFlipEffect() {
     */
 }
 
-// 3D Button Effects
+
 function initButtonEffects() {
-    // Simplified button effects to prevent flickering
+
     const buttons = document.querySelectorAll('.btn');
     
     buttons.forEach(btn => {
@@ -324,95 +324,95 @@ function initButtonEffects() {
     });
 }
 
-// Potter Registration Form
+
 const potterForm = document.getElementById('potterForm');
 if (potterForm) {
     potterForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
+
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
         
-        // Basic validation
+
         if (!data.name || !data.email || !data.phone || !data.location || !data.experience) {
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
         
-        // Email validation
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.email)) {
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
         
-        // Phone validation
+
         const phoneRegex = /^[6-9]\d{9}$/;
         if (!phoneRegex.test(data.phone.replace(/\D/g, ''))) {
             showNotification('Please enter a valid 10-digit phone number.', 'error');
             return;
         }
         
-        // Simulate form submission
+
         showNotification('Registration submitted successfully! We will contact you soon.', 'success');
         this.reset();
     });
 }
 
-// Custom Order Form
+
 const customForm = document.getElementById('customForm');
 if (customForm) {
     customForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
+
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
         
-        // Basic validation
+
         if (!data.productType || !data.customSize || !data.customDescription || 
             !data.customBudget || !data.customTimeline || !data.customContact) {
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
         
-        // Simulate form submission
+
         showNotification('Custom order request submitted! Our team will get back to you within 24 hours.', 'success');
         this.reset();
     });
 }
 
-// Contact Form
+
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
+
         const formData = new FormData(this);
         const data = Object.fromEntries(formData);
         
-        // Basic validation
+
         if (!data.contactName || !data.contactEmail || !data.contactSubject || !data.contactMessage) {
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
         
-        // Email validation
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(data.contactEmail)) {
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
         
-        // Simulate form submission
+
         showNotification('Message sent successfully! We will reply to you soon.', 'success');
         this.reset();
     });
 }
 
-// Newsletter Subscription
+
 const newsletterForm = document.querySelector('.newsletter');
 if (newsletterForm) {
     const newsletterInput = newsletterForm.querySelector('input[type="email"]');
@@ -439,15 +439,15 @@ if (newsletterForm) {
     });
 }
 
-// Notification System
+
 function showNotification(message, type = 'info') {
-    // Remove existing notifications
+
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Create notification element
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -458,7 +458,7 @@ function showNotification(message, type = 'info') {
         </div>
     `;
     
-    // Add styles
+
     notification.style.cssText = `
         position: fixed;
         top: 100px;
@@ -489,21 +489,21 @@ function showNotification(message, type = 'info') {
         margin-left: auto;
     `;
     
-    // Add to page
+
     document.body.appendChild(notification);
     
-    // Animate in
+
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Close functionality
+
     notification.querySelector('.notification-close').addEventListener('click', () => {
         notification.style.transform = 'translateX(400px)';
         setTimeout(() => notification.remove(), 300);
     });
     
-    // Auto close after 5 seconds
+
     setTimeout(() => {
         if (notification.parentNode) {
             notification.style.transform = 'translateX(400px)';
@@ -512,7 +512,7 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Product card interactions
+
 document.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -523,7 +523,7 @@ document.querySelectorAll('.product-card').forEach(card => {
     });
 });
 
-// Feature card interactions
+
 document.querySelectorAll('.feature-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-8px)';
@@ -534,7 +534,7 @@ document.querySelectorAll('.feature-card').forEach(card => {
     });
 });
 
-// Scroll animations
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -549,7 +549,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for scroll animations
+
 document.querySelectorAll('.product-card, .feature-card, .custom-step, .contact-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -557,7 +557,7 @@ document.querySelectorAll('.product-card, .feature-card, .custom-step, .contact-
     observer.observe(el);
 });
 
-// Parallax effect for hero section
+
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroImage = document.querySelector('.pottery-showcase');
@@ -567,7 +567,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add loading animation for forms
+
 function addLoadingState(button) {
     const originalText = button.textContent;
     button.textContent = 'Processing...';
@@ -581,7 +581,7 @@ function addLoadingState(button) {
     }, 2000);
 }
 
-// Add loading state to form submissions
+
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function(e) {
         const submitBtn = this.querySelector('button[type="submit"]');
@@ -591,7 +591,7 @@ document.querySelectorAll('form').forEach(form => {
     });
 });
 
-// Interactive Form Enhancements
+
 function initFormInteractions() {
     const formInputs = document.querySelectorAll('input, textarea, select');
     
@@ -608,7 +608,7 @@ function initFormInteractions() {
     });
 }
 
-// 3D Scroll Animations
+
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -624,7 +624,7 @@ function initScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe elements for scroll animations
+
     document.querySelectorAll('.product-card, .feature-card, .custom-step, .contact-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(50px) rotateX(20deg)';
@@ -633,7 +633,7 @@ function initScrollAnimations() {
     });
 }
 
-// Enhanced Parallax Effect
+
 function initEnhancedParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -644,7 +644,7 @@ function initEnhancedParallax() {
             heroImage.style.transform = `translateY(${scrolled * 0.3}px) rotateX(${scrolled * 0.1}deg)`;
         }
         
-        // Parallax effect for particles
+
         particles.forEach((particle, index) => {
             const speed = 0.5 + (index % 3) * 0.2;
             particle.style.transform = `translateY(${scrolled * speed}px)`;
@@ -652,25 +652,25 @@ function initEnhancedParallax() {
     });
 }
 
-// Apply Diwali discount to cart
+
 function applyDiwaliDiscount() {
     const cartTotal = document.getElementById('cartTotal');
     if (!cartTotal) return;
     
     const total = parseInt(cartTotal.textContent);
     
-    // Apply 30% discount for orders above ₹2999
+
     if (total > 2999) {
         const discount = total * 0.3;
         const discountedTotal = total - discount;
         
-        // Update cart total with discount
+
         cartTotal.textContent = Math.round(discountedTotal);
         
-        // Show discount notification
+
         showNotification(`🎉 Diwali Offer Applied! ₹${Math.round(discount)} discount on your order. Total: ₹${Math.round(discountedTotal)}`, 'success');
     } else {
-        // Show notification about the offer
+
         const remaining = 2999 - total;
         if (remaining > 0) {
             showNotification(`🛒 Spend ₹${remaining} more to get 30% off on your order!`, 'info');
@@ -678,7 +678,7 @@ function applyDiwaliDiscount() {
     }
 }
 
-// Magnetic Cursor Effect for Buttons
+
 function initMagneticButtons() {
     const magneticButtons = document.querySelectorAll('.btn');
     
@@ -697,150 +697,166 @@ function initMagneticButtons() {
     });
 }
 
-// Shopping Cart System
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentProductId = null;
 
-// Product Data
+// Validate and repair cart data on initialization
+cart = cart.map(item => {
+    if (item.price === undefined || item.price === null) {
+        const productData = products[item.id];
+        if (productData && productData.price !== undefined) {
+            item.price = productData.price;
+        } else {
+            item.price = 0;
+        }
+    }
+    return {
+        ...item,
+        quantity: item.quantity || 1
+    };
+});
+
+
 const products = {
     1: {
         id: 1,
         name: "Traditional Clay Pots",
         description: "Handcrafted earthenware perfect for cooking and storage. Made from natural clay and fired in traditional kilns.",
-        price: 599, // Average of ₹299-₹899
-        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center"
+        price: 599,
+        image: "claypots.webp"
     },
     2: {
         id: 2,
         name: "Decorative Vases",
         description: "Beautiful ceramic vases for home decoration. Each piece is uniquely crafted by skilled artisans.",
-        price: 699, // Average of ₹499-₹1,299
-        image: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=300&h=300&fit=crop&crop=center"
+        price: 699,
+        image: "vases.jpg"
     },
     3: {
         id: 3,
         name: "Tea Cups & Sets",
         description: "Traditional terracotta cups for authentic tea experience. Perfect for your morning chai.",
-        price: 324, // Average of ₹199-₹449
-        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=300&fit=crop&crop=center"
+        price: 324,
+        image: "tea.webp"
     },
     4: {
         id: 4,
         name: "Planters",
         description: "Eco-friendly clay planters for your garden. Natural clay helps regulate soil moisture.",
-        price: 549, // Average of ₹399-₹999
-        image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=300&fit=crop&crop=center"
+        price: 549,
+        image: "plant.jpg"
     },
     5: {
         id: 5,
         name: "Water Bottles",
         description: "Natural clay bottles for cool, pure water. Clay naturally cools and filters water.",
-        price: 474, // Average of ₹349-₹799
-        image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=300&h=300&fit=crop&crop=center"
+        price: 474,
+        image: "bottle.jpeg"
     },
     6: {
         id: 6,
         name: "Lamps & Diyas",
         description: "Traditional clay lamps for festivals and decoration. Create warm, ambient lighting.",
-        price: 249, // Average of ₹99-₹399
-        image: "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?w=300&h=300&fit=crop&crop=center"
+        price: 249,
+        image: "diya.jpg"
     },
     7: {
         id: 7,
         name: "Clay Bowls",
         description: "Handmade clay bowls for serving and dining. Perfect for traditional meals and modern kitchens.",
-        price: 299, // Average of ₹199-₹599
-        image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=300&h=300&fit=crop&crop=center"
+        price: 299,
+        image: "claypots.webp"
     },
     8: {
         id: 8,
         name: "Decorative Figurines",
         description: "Artistic clay figurines and sculptures. Beautiful handcrafted pieces for home decoration.",
-        price: 949, // Average of ₹599-₹1,299
-        image: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=300&h=300&fit=crop&crop=center"
+        price: 949,
+        image: "dolls.jpg"
     },
     9: {
         id: 9,
         name: "Storage Jars",
         description: "Large clay jars for food and grain storage. Traditional earthenware with excellent preservation properties.",
-        price: 1174, // Average of ₹799-₹1,549
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=300&fit=crop&crop=center"
+        price: 1174,
+        image: "storage.jpg"
     },
     10: {
         id: 10,
-        name: "Terracotta Plates",
+        name: "Terracotta dinner sets",
         description: "Traditional dining plates made from pure clay. Perfect for healthy and eco-friendly dining.",
-        price: 224, // Average of ₹149-₹299
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop&crop=center"
+        price: 224,
+        image: "dinner.jpg"
     },
     11: {
         id: 11,
         name: "Clay Wind Chimes",
         description: "Musical clay wind chimes for peaceful ambiance. Handcrafted with melodious tones.",
-        price: 424, // Average of ₹299-₹549
-        image: "https://images.unsplash.com/photo-1597149960419-0d90ac2e3db4?w=300&h=300&fit=crop&crop=center"
+        price: 424,
+        image: "chimes.jpeg"
     },
     12: {
         id: 12,
         name: "Earthen Coolers",
         description: "Natural clay water coolers for summer. Eco-friendly alternative to electric coolers.",
-        price: 1799, // Average of ₹1299-₹2,299
-        image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop&crop=center"
+        price: 1799,
+        image: "cool.jpeg"
     },
     13: {
         id: 13,
         name: "Kulhad Tea Cups",
         description: "Traditional Indian clay cups for chai. Authentic taste and eco-friendly disposable cups.",
-        price: 149, // Average of ₹99-₹199
-        image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center"
+        price: 149,
+        image: "tea.jpeg"
     },
     14: {
         id: 14,
         name: "Matka Water Pots",
         description: "Traditional water storage earthen pots. Keep water naturally cool and fresh.",
-        price: 599, // Average of ₹399-₹799
-        image: "https://images.unsplash.com/photo-1630692131380-31b468e5bff8?w=300&h=300&fit=crop&crop=center"
+        price: 599,
+        image: "matka.avif"
     },
     15: {
         id: 15,
         name: "Clay Cooking Pots",
         description: "Traditional handi and earthen cookware. Perfect for slow cooking and enhancing flavors.",
-        price: 899, // Average of ₹599-₹1,199
-        image: "https://images.unsplash.com/photo-1586174158878-b1a6b7b5de4f?w=300&h=300&fit=crop&crop=center"
+        price: 899,
+        image: "cookpots.avif"
     }
 };
 
-// Diwali Offer Configuration
-// Set to Diwali 2025 (October 26th) - actual date
-// Try different date formats to ensure compatibility
+
+
+
 let diwaliDate;
 try {
-    // Try ISO format first
+
     diwaliDate = new Date('2025-10-26T00:00:00');
     
-    // Fallback to different format if invalid
+
     if (isNaN(diwaliDate.getTime())) {
-        diwaliDate = new Date(2025, 9, 26, 0, 0, 0); // Month is 0-indexed
+
     }
     
-    // Another fallback
+
     if (isNaN(diwaliDate.getTime())) {
         diwaliDate = new Date('October 26, 2025');
     }
 } catch (error) {
     console.error('Date creation failed:', error);
-    // Final fallback - 30 days from now
+
     diwaliDate = new Date();
     diwaliDate.setDate(diwaliDate.getDate() + 30);
 }
 
-// Debug: Log the target date and current time
+
 console.log('Diwali Date:', diwaliDate);
 console.log('Current Date:', new Date());
 console.log('Time difference (ms):', diwaliDate.getTime() - new Date().getTime());
 console.log('Days until Diwali:', Math.floor((diwaliDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)));
 
-// Initialize countdown
+
 function initCountdown() {
     console.log('Initializing Diwali countdown...');
     
@@ -849,7 +865,7 @@ function initCountdown() {
     
     if (!countdownElement) {
         console.error('Diwali countdown container not found!');
-        // Try again after a short delay
+    
         setTimeout(() => {
             console.log('Retrying countdown initialization...');
             initCountdown();
@@ -857,7 +873,7 @@ function initCountdown() {
         return;
     }
 
-    // Test if individual elements exist
+
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
@@ -876,15 +892,15 @@ function initCountdown() {
         return;
     }
 
-    // Initialize the countdown immediately
+
     updateCountdown();
     
-    // Set up interval to update every second
+
     const intervalId = setInterval(updateCountdown, 1000);
     console.log('Countdown interval started with ID:', intervalId);
 }
 
-// Update countdown timer
+
 function updateCountdown() {
     try {
         const now = new Date().getTime();
@@ -906,7 +922,7 @@ function updateCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Debug: Check if elements exist
+
         const daysElement = document.getElementById('days');
         const hoursElement = document.getElementById('hours');
         const minutesElement = document.getElementById('minutes');
@@ -921,7 +937,7 @@ function updateCountdown() {
 
         console.log('Calculated time:', { days, hours, minutes, seconds });
 
-        // Update elements with safety checks
+
         if (daysElement) {
             daysElement.textContent = days.toString().padStart(2, '0');
             console.log('Updated days element:', daysElement.textContent);
@@ -947,7 +963,7 @@ function updateCountdown() {
             console.error('Seconds element not found!');
         }
         
-        // Force a repaint
+
         if (daysElement) {
             daysElement.style.opacity = '0.99';
             setTimeout(() => {
@@ -960,7 +976,7 @@ function updateCountdown() {
     }
 }
 
-// Cart Functions
+
 function addToCart(productId) {
     console.log('addToCart function called with productId:', productId);
     console.log('Products object:', products);
@@ -999,10 +1015,32 @@ function removeFromCart(productId) {
     updateCartDisplay();
 }
 
-//dashboard 
-// ...existing code...
+function updateQuantity(productId, change) {
+    console.log('updateQuantity called with productId:', productId, 'change:', change);
+    
+    const quantityChange = parseInt(change);
+    const item = cart.find(item => item.id === productId);
+    
+    if (!item) {
+        console.error('Item not found in cart:', productId);
+        return;
+    }
+    
+    item.quantity += quantityChange;
+    
+    if (item.quantity <= 0) {
+        removeFromCart(productId);
+        showNotification('Item removed from cart', 'info');
+    } else {
+        updateCartDisplay();
+        console.log('Updated quantity for item:', productId, 'new quantity:', item.quantity);
+    }
+}
 
-// --- Dashboard & Order Saving Logic ---
+
+
+
+
 
 /**
  * Save the current cart as an order and clear the cart.
@@ -1014,18 +1052,23 @@ function saveOrderAndRedirect() {
         return;
     }
 
-    // Prepare order data
+    // Create order object with validated data
     const order = {
         date: new Date().toLocaleString(),
         items: cart.map(item => ({
             name: item.name,
-            qty: item.quantity,
-            price: item.price
+            qty: item.quantity || 1,
+            price: item.price !== undefined ? item.price : 0
         })),
-        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+        total: cart.reduce((sum, item) => {
+            const itemPrice = item.price !== undefined ? item.price : 0;
+            const itemQuantity = item.quantity || 1;
+            return sum + (itemPrice * itemQuantity);
+        }, 0),
+        status: "Order Placed"
     };
 
-    // Save to localStorage
+    // Save order to localStorage
     const orders = JSON.parse(localStorage.getItem('orders') || '[]');
     orders.push(order);
     localStorage.setItem('orders', JSON.stringify(orders));
@@ -1035,38 +1078,68 @@ function saveOrderAndRedirect() {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
 
+    // Show success message
+    showNotification('Order placed successfully!', 'success');
+
     // Redirect to dashboard
     window.location.href = 'dashboard.html';
 }
 
-// --- Update Cart Modal Checkout Button ---
+
 
 function initCartModal() {
     const cartBtn = document.getElementById('cartBtn');
     const cartModal = document.getElementById('cartModal');
     const cartClose = document.getElementById('cartClose');
     const cartItems = document.getElementById('cartItems');
-
-    // ...existing code...
-
+    
+    // Initialize cart modal functionality
+    if (!cartBtn || !cartModal || !cartClose) {
+        console.warn('Cart modal elements not found in DOM');
+        return;
+    }
+    
+    // Open cart modal
+    cartBtn.addEventListener('click', () => {
+        cartModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close cart modal
+    cartClose.addEventListener('click', () => {
+        cartModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside
+    cartModal.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
     // Clear cart button
     const clearCartBtn = document.getElementById('clearCart');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', () => {
-            cart = [];
-            updateCartDisplay();
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                updateCartDisplay();
+                showNotification('Cart cleared successfully', 'info');
+            }
         });
     }
-
+    
     // Checkout button
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             if (cart.length > 0) {
-                // Simulate payment process
-                if (confirm('Proceed to payment?')) {
-                    saveOrderAndRedirect();
-                }
+                // Save cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                // Redirect to payment page
+                window.location.href = 'payment.html';
             } else {
                 showNotification('Your cart is empty!', 'error');
             }
@@ -1074,9 +1147,9 @@ function initCartModal() {
     }
 }
 
-// ...existing code...
 
-// Chatbot Functionality
+
+
 function initChatbot() {
     const chatbotButton = document.getElementById('chatbotButton');
     const chatbotWindow = document.getElementById('chatbotWindow');
@@ -1085,32 +1158,32 @@ function initChatbot() {
     const chatbotInput = document.getElementById('chatbotInput');
     const sendButton = document.getElementById('sendButton');
     
-    // Toggle chat window visibility
+
     function toggleChatbot() {
         chatbotWindow.classList.toggle('active');
         if (chatbotWindow.classList.contains('active')) {
-            // Focus input when opening
+
             chatbotInput.focus();
         }
     }
     
-    // Close chatbot
+
     function closeChatbotWindow() {
         chatbotWindow.classList.remove('active');
     }
     
-    // Add a message to the chat
+
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
         messageDiv.textContent = message;
         chatbotMessages.appendChild(messageDiv);
         
-        // Scroll to bottom
+
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
     
-    // Generate bot response based on user message
+
     function getBotResponse(userMessage) {
         const lowerMessage = userMessage.toLowerCase();
         
@@ -1135,17 +1208,17 @@ function initChatbot() {
         }
     }
     
-    // Send message
+
     function sendMessage() {
         const message = chatbotInput.value.trim();
         if (message) {
-            // Add user message
+
             addMessage(message, true);
             
-            // Clear input
+
             chatbotInput.value = '';
             
-            // Simulate typing delay
+
             setTimeout(() => {
                 const botResponse = getBotResponse(message);
                 addMessage(botResponse, false);
@@ -1153,7 +1226,7 @@ function initChatbot() {
         }
     }
     
-    // Event listeners
+
     if (chatbotButton) {
         chatbotButton.addEventListener('click', toggleChatbot);
     }
@@ -1174,7 +1247,7 @@ function initChatbot() {
         });
     }
     
-    // Close chatbot when clicking outside
+
     document.addEventListener('click', (e) => {
         if (!chatbotWindow.contains(e.target) && !chatbotButton.contains(e.target) && chatbotWindow.classList.contains('active')) {
             closeChatbotWindow();
@@ -1182,34 +1255,34 @@ function initChatbot() {
     });
 }
 
-// Initialize chatbot when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', function() {
     initWelcomeScreen();
     initThemeSystem();
     initChatbot();
 });
 
-function updateQuantity(productId, change) {
-    console.log('Updating quantity. Product ID:', productId, 'Change:', change);
-    const item = cart.find(item => item.id === productId);
-    if (!item) {
-        console.error('Item not found in cart for ID:', productId);
-        return;
-    }
 
-    item.quantity += change;
-    console.log('New quantity:', item.quantity);
-    
-    if (item.quantity <= 0) {
-        removeFromCart(productId);
-    } else {
-        updateCartDisplay();
-    }
-}
 
 function updateCartDisplay() {
     console.log('updateCartDisplay function called');
     console.log('Current cart contents:', cart);
+    
+    // Validate and repair cart data
+    cart = cart.map(item => {
+        if (item.price === undefined || item.price === null) {
+            const productData = products[item.id];
+            if (productData && productData.price !== undefined) {
+                item.price = productData.price;
+            } else {
+                item.price = 0;
+            }
+        }
+        return {
+            ...item,
+            quantity: item.quantity || 1
+        };
+    });
     
     const cartCount = document.getElementById('cartCount');
     const cartItems = document.getElementById('cartItems');
@@ -1230,7 +1303,7 @@ function updateCartDisplay() {
         console.error('Cart count element not found');
     }
     
-    // Update cart items
+    // Update cart items display
     if (cartItems) {
         if (cart.length === 0) {
             cartItems.innerHTML = `
@@ -1249,7 +1322,7 @@ function updateCartDisplay() {
                     </div>
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <div class="cart-item-price">₹${item.price}</div>
+                        <div class="cart-item-price">₹${item.price || 0}</div>
                     </div>
                     <div class="cart-item-actions">
                         <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -1268,7 +1341,11 @@ function updateCartDisplay() {
     }
     
     if (cartTotal) {
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const total = cart.reduce((sum, item) => {
+            const itemPrice = item.price !== undefined ? item.price : 0;
+            const itemQuantity = item.quantity || 0;
+            return sum + (itemPrice * itemQuantity);
+        }, 0);
         console.log('Cart total:', total);
         cartTotal.textContent = total;
     } else {
@@ -1283,11 +1360,11 @@ function updateCartDisplay() {
     }
 }
 
-// Add to Cart Buttons
+
 function initAddToCartButtons() {
     console.log('Initializing Add to Cart Buttons...');
     
-    // Wait a bit for DOM to be fully ready
+
     setTimeout(() => {
         const addToCartBtns = document.querySelectorAll('.add-to-cart');
         console.log('Found', addToCartBtns.length, 'add-to-cart buttons');
@@ -1297,18 +1374,18 @@ function initAddToCartButtons() {
             return;
         }
         
-        // Remove any existing event listeners to prevent duplicates
+
         addToCartBtns.forEach(btn => {
-            // Create a new button with the same properties
+
             const newBtn = document.createElement('button');
             newBtn.className = btn.className;
             newBtn.setAttribute('data-product-id', btn.getAttribute('data-product-id'));
             newBtn.textContent = btn.textContent;
             
-            // Replace the old button with the new one
+
             btn.parentNode.replaceChild(newBtn, btn);
             
-            // Add click event listener to the new button
+
             newBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1327,7 +1404,7 @@ function initAddToCartButtons() {
     }, 100);
 }
 
-// Product Modal System
+
 function initProductModal() {
     console.log('Initializing Product Modal System...');
     const productModal = document.getElementById('productModal');
@@ -1338,29 +1415,29 @@ function initProductModal() {
     const modalProductPrice = document.getElementById('modalProductPrice');
     const modalAddToCart = document.getElementById('modalAddToCart');
     
-    // Check if all required elements exist
+
     if (!productModal || !productClose || !modalProductName || !modalProductImage || 
         !modalProductDescription || !modalProductPrice || !modalAddToCart) {
         console.error('Product modal elements not found in DOM');
         return;
     }
     
-    // Handle view details buttons
+
     setTimeout(() => {
         const viewDetailBtns = document.querySelectorAll('.view-details');
         console.log('Found', viewDetailBtns.length, 'view-details buttons');
         
         viewDetailBtns.forEach(btn => {
-            // Create a new button with the same properties
+
             const newBtn = document.createElement('button');
             newBtn.className = btn.className;
             newBtn.setAttribute('data-product-id', btn.getAttribute('data-product-id'));
             newBtn.textContent = btn.textContent;
             
-            // Replace the old button with the new one
+
             btn.parentNode.replaceChild(newBtn, btn);
             
-            // Add click event listener to the new button
+
             newBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1370,7 +1447,7 @@ function initProductModal() {
                 const product = products[productId];
                 
                 if (product) {
-                    // Find the product card to get the image source
+
                     const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
                     let productImageSrc = '';
                     
@@ -1386,7 +1463,7 @@ function initProductModal() {
                     modalProductImage.src = productImageSrc || product.image;
                     modalProductImage.alt = product.name;
                     modalProductDescription.textContent = product.description;
-                    modalProductPrice.textContent = product.price;
+                    modalProductPrice.textContent = product.price || 0;
                     
                     productModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -1398,7 +1475,7 @@ function initProductModal() {
         });
     }, 100);
     
-    // Handle close button for product modal
+
     setTimeout(() => {
         const newProductClose = document.createElement('button');
         newProductClose.id = 'productClose';
@@ -1413,7 +1490,7 @@ function initProductModal() {
         });
     }, 100);
     
-    // Close on backdrop click
+
     productModal.addEventListener('click', (e) => {
         if (e.target === productModal) {
             productModal.classList.remove('active');
@@ -1421,7 +1498,7 @@ function initProductModal() {
         }
     });
     
-    // Handle add to cart from modal
+
     setTimeout(() => {
         const newModalAddToCart = document.createElement('button');
         newModalAddToCart.id = 'modalAddToCart';
@@ -1448,32 +1525,32 @@ function initProductModal() {
     }, 100);
 }
 
-// Cart Modal System
+
 function initCartModal() {
     const cartBtn = document.getElementById('cartBtn');
     const cartModal = document.getElementById('cartModal');
     const cartClose = document.getElementById('cartClose');
     const cartItems = document.getElementById('cartItems');
     
-    // Check if cart elements exist
+
     if (!cartBtn || !cartModal || !cartClose) {
         console.warn('Cart modal elements not found in DOM');
         return;
     }
     
-    // Open cart modal
+
     cartBtn.addEventListener('click', () => {
         cartModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
     
-    // Close cart modal
+
     cartClose.addEventListener('click', () => {
         cartModal.classList.remove('active');
         document.body.style.overflow = '';
     });
     
-    // Close on backdrop click
+
     cartModal.addEventListener('click', (e) => {
         if (e.target === cartModal) {
             cartModal.classList.remove('active');
@@ -1481,7 +1558,7 @@ function initCartModal() {
         }
     });
     
-    // Clear cart button
+    
     const clearCartBtn = document.getElementById('clearCart');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', () => {
@@ -1490,14 +1567,14 @@ function initCartModal() {
         });
     }
     
-    // Checkout button
+    
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             if (cart.length > 0) {
-                // Save cart to localStorage before redirecting
+
                 localStorage.setItem('cart', JSON.stringify(cart));
-                // Redirect to payment page
+
                 window.location.href = 'payment.html';
             } else {
                 showNotification('Your cart is empty!', 'error');
@@ -1506,7 +1583,7 @@ function initCartModal() {
     }
 }
 
-// Initialize all systems when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded - Initializing systems...');
     
@@ -1514,16 +1591,16 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeSystem();
     initCartModal();
     
-    // Initialize product modal and add to cart buttons
+
     console.log('Initializing product modal and add to cart buttons...');
     initProductModal();
     initAddToCartButtons();
     
-    // Initialize video previews
+
     console.log('Initializing video previews...');
     initVideoPreviews();
     
-    // Initialize Diwali countdown
+
     setTimeout(() => {
         console.log('Initializing Diwali countdown...');
         initCountdown();
@@ -1533,7 +1610,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCustomCursor();
 });
 
-// Initialize all 3D effects after a delay to ensure DOM is ready
+
 setTimeout(() => {
     createParticles();
     initTiltEffect();
@@ -1543,39 +1620,39 @@ setTimeout(() => {
     initScrollAnimations();
     initEnhancedParallax();
     
-    // Initialize cart display
+
     updateCartDisplay();
 }, 100);
 
-// Backup initialization using window.onload
+
 window.addEventListener('load', function() {
     console.log('Window fully loaded - backup countdown initialization...');
     
-    // Always try to reinitialize countdown to ensure it works
+
     setTimeout(() => {
         console.log('Running backup countdown initialization...');
         
-        // Force reinitialize the countdown
+
         const countdownContainer = document.getElementById('diwaliCountdown');
         if (countdownContainer) {
             console.log('Found countdown container, forcing update...');
             
-            // Manually trigger an update
+
             updateCountdown();
             
-            // Start the interval again as a backup
+
             setInterval(updateCountdown, 1000);
         }
     }, 2000);
 });
 
-// Additional manual trigger for testing
+
 setTimeout(() => {
     console.log('Manual countdown trigger after 3 seconds...');
     if (typeof updateCountdown === 'function') {
         updateCountdown();
         
-        // Force update the display with current time
+
         const now = new Date();
         const currentSeconds = now.getSeconds();
         const currentMinutes = now.getMinutes();
@@ -1587,13 +1664,13 @@ setTimeout(() => {
             seconds: currentSeconds
         });
         
-        // Test by setting the seconds element to current seconds to verify it's working
+
         const secondsElement = document.getElementById('seconds');
         if (secondsElement) {
             console.log('Testing: Setting seconds to current seconds:', currentSeconds);
             secondsElement.textContent = currentSeconds.toString().padStart(2, '0');
             
-            // Change it back after 2 seconds to show it's dynamic
+
             setTimeout(() => {
                 console.log('Reverting to countdown...');
                 updateCountdown();
@@ -1602,7 +1679,7 @@ setTimeout(() => {
     }
 }, 3000);
 
-// Add fade-in animation to hero content
+
 const heroContent = document.querySelector('.hero-content');
 if (heroContent) {
     setTimeout(() => {
@@ -1610,19 +1687,19 @@ if (heroContent) {
     }, 500);
 }
 
-// Add floating animation to pottery showcase
+
 const pots = document.querySelectorAll('.pot');
 pots.forEach((pot, index) => {
     pot.style.animationDelay = `${index * 0.5}s`;
 });
 
-// Add staggered animation to feature cards
+
 const featureCards = document.querySelectorAll('.feature-card');
 featureCards.forEach((card, index) => {
     card.style.animationDelay = `${index * 0.2}s`;
 });
 
-// Add hover effects to buttons
+
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-2px)';
@@ -1633,7 +1710,7 @@ document.querySelectorAll('.btn').forEach(btn => {
     });
 });
 
-// Add click ripple effect to buttons
+
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -1663,7 +1740,7 @@ document.querySelectorAll('.btn').forEach(btn => {
     });
 });
 
-// Add ripple animation CSS
+
 const style = document.createElement('style');
 style.textContent = `
     @keyframes ripple {
@@ -1675,24 +1752,24 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Add magnetic cursor effect for buttons
+
 initMagneticButtons();
 
-// Initialize custom cursor
+
 initCustomCursor();
 
-// Video Preview Functionality
+
 function initVideoPreviews() {
     console.log('Initializing video previews...');
     
-    // Add click event to video containers
+
     const videoContainers = document.querySelectorAll('.video-container');
     
     videoContainers.forEach(container => {
-        // Initially hide the iframe
+
         const iframe = container.querySelector('iframe');
         if (iframe) {
-            // Store the src in data attribute and remove src to prevent loading
+
             const src = iframe.src || iframe.getAttribute('data-src');
             if (src) {
                 iframe.setAttribute('data-src', src);
@@ -1701,13 +1778,13 @@ function initVideoPreviews() {
         }
         
         container.addEventListener('click', function() {
-            // Add active class to container
+
             this.classList.add('active');
             
-            // Get the iframe
+
             const iframe = this.querySelector('iframe');
             
-            // If iframe doesn't have src but has data-src, set it to load the video
+
             if (iframe && !iframe.src) {
                 const src = iframe.getAttribute('data-src');
                 if (src) {
