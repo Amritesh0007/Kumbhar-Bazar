@@ -1,52 +1,96 @@
-# KUMBHARBAJAR Form Submission Backend
+# Kumbhar Bazar - Pottery Marketplace
 
-This repository contains the backend code for handling form submissions from the KUMBHARBAJAR website and sending them to kumbharbazar@gmail.com.
+A modern online marketplace connecting traditional potters with customers who appreciate authentic handmade pottery.
+
+## Project Structure
+
+```
+Kumbhar-Bazar/
+├── css/
+│   └── styles.css          # Main stylesheet
+├── js/
+│   ├── script.js           # Main client-side JavaScript
+│   ├── server.js           # Express server
+│   └── simple-server.js    # Simple HTTP server
+├── images/                 # All image assets
+│   ├── bottle.jpeg
+│   ├── chimes.jpeg
+│   ├── claypots.webp
+│   ├── cookpots.avif
+│   ├── cool.jpeg
+│   ├── dinner.jpg
+│   ├── diya.jpg
+│   ├── dolls.jpg
+│   ├── drying.jpeg
+│   ├── glazing.jpeg
+│   ├── klinn.jpeg
+│   ├── logo.png
+│   ├── matka.avif
+│   ├── plant.jpg
+│   ├── potter.webp
+│   ├── prepara.jpeg
+│   ├── storage.jpg
+│   ├── tea.jpeg
+│   ├── tea.webp
+│   └── vases.jpg
+├── index.html              # Main landing page
+├── dashboard.html          # User dashboard
+├── form.html               # Contact form
+├── payment.html            # Payment page
+├── package.json            # Node.js dependencies
+├── start_server.bat        # Windows batch file to start server
+└── README.md               # This file
+```
 
 ## Features
 
-- Collects form data from the website
-- Sends form data to kumbharbazar@gmail.com via Gmail
-- Sends confirmation email to the user
-- Logs each submission to a local JSON file
-- Validates form fields
-- Handles errors gracefully
-- Supports CORS for frontend integration
+- Browse authentic handmade pottery products
+- Connect with traditional potters
+- Custom pottery orders
+- Secure payment processing
+- Responsive design for all devices
+- Theme customization options
+- Shopping cart functionality
 
-## Requirements
+## Getting Started
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/kunal4060/Kumbhar_Bzar.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd Kumbhar-Bazar
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the server:
+   ```bash
+   node js/server.js
+   ```
+   Or on Windows, simply run `start_server.bat`
+
+5. Open your browser and visit `http://localhost:3000`
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript (ES6+)
 - Node.js
-- npm
-- Gmail account with App Password enabled
+- Express.js
+- Font Awesome Icons
+- Google Fonts
 
-## Installation
+## Contributing
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Create a `.env` file with your email credentials (see `.env.example`)
-4. Start the server: `node server.js`
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Usage
+## License
 
-The backend provides a single endpoint:
-
-- `POST /api/contact` - Submit form data
-
-Form data should include:
-- name (string)
-- email (string)
-- phone (string)
-- message (string)
-
-## Form Submission Logs
-
-All form submissions are saved in the `form_submissions/` directory as JSON files with timestamps.
-
-## Security Note
-
-- Never commit your `.env` file to version control
-- Use HTTPS in production
-- Keep your Gmail App Password secure
-
-## Credits
-
-Form submission system built by Qoder AI Assistant for KUMBHARBAJAR.
+This project is licensed under the MIT License.
